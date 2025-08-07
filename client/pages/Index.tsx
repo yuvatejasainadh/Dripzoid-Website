@@ -159,13 +159,16 @@ export default function Index() {
           {/* Mobile Navigation */}
           {isMenuOpen && (
             <nav className="md:hidden py-4 border-t border-border">
+              <div className="mb-4">
+                <SearchBar placeholder="Search products..." />
+              </div>
               {categories.map((category) => (
                 <Link
                   key={category.name}
                   to={category.path}
                   className={`block py-2 text-sm font-medium transition-colors ${
-                    category.available 
-                      ? "text-foreground hover:text-neon-blue" 
+                    category.available
+                      ? "text-foreground hover:text-neon-blue"
                       : "text-muted-foreground cursor-not-allowed"
                   }`}
                   onClick={() => setIsMenuOpen(false)}
