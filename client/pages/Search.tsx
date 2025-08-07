@@ -487,7 +487,7 @@ export default function SearchResults() {
                           className="flex-1 bg-neon-blue hover:bg-neon-blue/90 text-neon-foreground"
                           onClick={(e) => {
                             e.preventDefault();
-                            alert(`Added ${product.name} to cart!`);
+                            addToCart(product);
                           }}
                         >
                           Add to Cart
