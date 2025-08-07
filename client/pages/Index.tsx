@@ -86,6 +86,11 @@ export default function Index() {
               />
             </Link>
 
+            {/* Search Bar - Desktop */}
+            <div className="hidden md:block flex-1 max-w-md mx-8">
+              <SearchBar />
+            </div>
+
             {/* Desktop Navigation */}
             <nav className="hidden md:flex items-center space-x-8">
               {categories.map((category) => (
@@ -93,8 +98,8 @@ export default function Index() {
                   key={category.name}
                   to={category.path}
                   className={`text-sm font-medium transition-colors ${
-                    category.available 
-                      ? "text-foreground hover:text-neon-blue" 
+                    category.available
+                      ? "text-foreground hover:text-neon-blue"
                       : "text-muted-foreground cursor-not-allowed"
                   }`}
                 >
