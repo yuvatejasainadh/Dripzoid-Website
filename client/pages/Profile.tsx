@@ -241,19 +241,29 @@ export default function Profile() {
           </div>
           <div className="flex-1">
             <h1 className="text-2xl font-bold mb-1">
-              {profileData.firstName} {profileData.lastName}
+              {user.firstName} {user.lastName}
             </h1>
-            <p className="text-muted-foreground mb-2">{profileData.email}</p>
-            <p className="text-muted-foreground">{profileData.phone}</p>
+            <p className="text-muted-foreground mb-2">{user.email}</p>
+            <p className="text-muted-foreground">{user.phone}</p>
           </div>
-          <Button 
-            variant="outline" 
-            onClick={() => setIsEditing(!isEditing)}
-            className="flex items-center gap-2"
-          >
-            <Edit className="h-4 w-4" />
-            Edit Profile
-          </Button>
+          <div className="flex gap-2">
+            <Button
+              variant="outline"
+              onClick={() => setIsEditing(!isEditing)}
+              className="flex items-center gap-2"
+            >
+              <Edit className="h-4 w-4" />
+              Edit Profile
+            </Button>
+            <Button
+              variant="destructive"
+              onClick={logout}
+              className="flex items-center gap-2"
+            >
+              <LogOut className="h-4 w-4" />
+              Logout
+            </Button>
+          </div>
         </div>
 
         {/* Profile Tabs */}
