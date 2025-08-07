@@ -11,6 +11,7 @@ export default function Profile() {
   const [isDarkMode, setIsDarkMode] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isEditing, setIsEditing] = useState(false);
+  const [activeTab, setActiveTab] = useState("orders");
   const [editedUser, setEditedUser] = useState({
     firstName: "",
     lastName: "",
