@@ -10,7 +10,7 @@ import SearchBar from "../components/SearchBar";
 export default function Index() {
   const [isDarkMode, setIsDarkMode] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const { addToCart, addToWishlist, isInWishlist, getCartCount } = useCart();
+  const { addToCart, addToWishlist, isInWishlist, getCartCount, wishlistItems } = useCart();
   const { isLoggedIn, user, requireAuth } = useAuth();
 
   const toggleDarkMode = () => {
