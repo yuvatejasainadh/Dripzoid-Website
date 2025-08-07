@@ -1,10 +1,11 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
-import { ShoppingBag, Heart, Search, User, Menu, Moon, Sun, Star, Filter, SlidersHorizontal } from "lucide-react";
+import { Link, useNavigate } from "react-router-dom";
+import { ShoppingBag, Heart, User, Menu, Moon, Sun, Star, Filter, SlidersHorizontal } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { useCart } from "../context/CartContext";
 import { useAuth } from "../context/AuthContext";
+import SearchBar from "../components/SearchBar";
 
 export default function Men() {
   const [isDarkMode, setIsDarkMode] = useState(false);
@@ -13,6 +14,7 @@ export default function Men() {
   const [sortBy, setSortBy] = useState("popularity");
   const { addToCart, addToWishlist, isInWishlist, getCartCount, wishlistItems } = useCart();
   const { isLoggedIn, requireAuth } = useAuth();
+  const navigate = useNavigate();
 
   const toggleDarkMode = () => {
     setIsDarkMode(!isDarkMode);
@@ -22,8 +24,7 @@ export default function Men() {
   const categories = [
     { name: "MEN", path: "/men", available: true },
     { name: "WOMEN", path: "/women", available: true },
-    { name: "KIDS", path: "/kids", available: false },
-    { name: "ACCESSORIES", path: "/accessories", available: false }
+    { name: "KIDS", path: "/kids", available: false }
   ];
 
   const products = [
@@ -152,8 +153,8 @@ export default function Men() {
                   key={category.name}
                   to={category.path}
                   className={`text-sm font-medium transition-colors ${
-                    category.available 
-                      ? "text-foreground hover:text-neon-blue" 
+                    category.available
+                      ? "text-foreground hover:text-neon-blue"
                       : "text-muted-foreground cursor-not-allowed"
                   } ${category.name === "MEN" ? "text-neon-blue" : ""}`}
                 >
@@ -161,15 +162,13 @@ export default function Men() {
                   {!category.available && <span className="ml-1 text-xs">(Soon)</span>}
                 </Link>
               ))}
+              <SearchBar className="w-64" placeholder="Search men's products..." />
             </nav>
 
             {/* Right side actions */}
             <div className="flex items-center space-x-4">
               <Button variant="ghost" size="icon" onClick={toggleDarkMode}>
                 {isDarkMode ? <Sun className="h-5 w-5" /> : <Moon className="h-5 w-5" />}
-              </Button>
-              <Button variant="ghost" size="icon">
-                <Search className="h-5 w-5" />
               </Button>
               <Button variant="ghost" size="icon" asChild className="relative">
                 <Link to="/profile#wishlist">
@@ -434,7 +433,8 @@ export default function Men() {
                         onClick={(e) => {
                           e.preventDefault();
                           if (requireAuth()) {
-                            window.location.href = '/checkout';
+                            addToCart(product);
+                            navigate('/checkout');
                           }
                         }}
                       >
