@@ -13,6 +13,14 @@ export default function Login() {
   const [otp, setOtp] = useState("");
   const [step, setStep] = useState("input"); // input, otp, success
   const [loginMethod, setLoginMethod] = useState("phone");
+  const { login, isLoggedIn } = useAuth();
+
+  // Redirect if already logged in
+  useEffect(() => {
+    if (isLoggedIn) {
+      window.location.href = '/';
+    }
+  }, [isLoggedIn]);
 
   const toggleDarkMode = () => {
     setIsDarkMode(!isDarkMode);
