@@ -8,6 +8,7 @@ import { useCart } from "../context/CartContext";
 export default function Index() {
   const [isDarkMode, setIsDarkMode] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const { addToCart, addToWishlist, isInWishlist, getCartCount } = useCart();
 
   const toggleDarkMode = () => {
     setIsDarkMode(!isDarkMode);
