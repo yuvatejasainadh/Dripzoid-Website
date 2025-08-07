@@ -12,6 +12,7 @@ export default function SearchResults() {
   const [isFilterOpen, setIsFilterOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState(searchParams.get('q') || '');
   const [sortBy, setSortBy] = useState("relevance");
+  const { addToCart, addToWishlist, isInWishlist, getCartCount } = useCart();
 
   const toggleDarkMode = () => {
     setIsDarkMode(!isDarkMode);
