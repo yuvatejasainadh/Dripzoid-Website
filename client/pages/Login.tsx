@@ -69,6 +69,16 @@ export default function Login() {
 
   const loginWithPassword = () => {
     if (email.includes("@") && password.length >= 6) {
+      // Create user data for login
+      const userData = {
+        id: "demo_user_" + Date.now(),
+        firstName: email.split("@")[0],
+        lastName: "User",
+        email: email,
+        phone: "+91 9876543210"
+      };
+
+      login(userData);
       setStep("success");
       setTimeout(() => {
         window.location.href = "/";
