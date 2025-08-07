@@ -15,8 +15,7 @@ export default function Accessories() {
   const categories = [
     { name: "MEN", path: "/men", available: true },
     { name: "WOMEN", path: "/women", available: true },
-    { name: "KIDS", path: "/kids", available: false },
-    { name: "ACCESSORIES", path: "/accessories", available: false }
+    { name: "KIDS", path: "/kids", available: false }
   ];
 
   return (
