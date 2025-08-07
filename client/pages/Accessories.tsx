@@ -43,10 +43,10 @@ export default function Accessories() {
                   key={category.name}
                   to={category.path}
                   className={`text-sm font-medium transition-colors ${
-                    category.available 
-                      ? "text-foreground hover:text-neon-blue" 
+                    category.available
+                      ? "text-foreground hover:text-neon-blue"
                       : "text-muted-foreground cursor-not-allowed"
-                  } ${category.name === "ACCESSORIES" ? "text-neon-blue" : ""}`}
+                  }`}
                 >
                   {category.name}
                   {!category.available && <span className="ml-1 text-xs">(Soon)</span>}
@@ -90,10 +90,10 @@ export default function Accessories() {
                   key={category.name}
                   to={category.path}
                   className={`block py-2 text-sm font-medium transition-colors ${
-                    category.available 
-                      ? "text-foreground hover:text-neon-blue" 
+                    category.available
+                      ? "text-foreground hover:text-neon-blue"
                       : "text-muted-foreground cursor-not-allowed"
-                  } ${category.name === "ACCESSORIES" ? "text-neon-blue" : ""}`}
+                  }`}
                   onClick={() => setIsMenuOpen(false)}
                 >
                   {category.name}
