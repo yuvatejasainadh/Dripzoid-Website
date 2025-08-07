@@ -96,9 +96,11 @@ export default function Cart() {
               </Button>
               <Button variant="ghost" size="icon" className="relative">
                 <ShoppingBag className="h-5 w-5" />
-                <Badge className="absolute -top-2 -right-2 h-5 w-5 flex items-center justify-center p-0 bg-neon-blue">
-                  {cartItems.reduce((sum, item) => sum + item.quantity, 0)}
-                </Badge>
+                {getCartCount() > 0 && (
+                  <Badge className="absolute -top-2 -right-2 h-5 w-5 flex items-center justify-center p-0 bg-neon-blue text-neon-foreground text-xs">
+                    {getCartCount()}
+                  </Badge>
+                )}
               </Button>
               <Button variant="ghost" size="icon">
                 <User className="h-5 w-5" />
