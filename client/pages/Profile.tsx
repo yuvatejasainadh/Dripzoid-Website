@@ -17,6 +17,7 @@ export default function Profile() {
     phone: "+91 9876543210",
     avatar: ""
   });
+  const { wishlistItems, addToCart, removeFromWishlist, getCartCount } = useCart();
 
   const toggleDarkMode = () => {
     setIsDarkMode(!isDarkMode);
