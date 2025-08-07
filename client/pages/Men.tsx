@@ -12,6 +12,7 @@ export default function Men() {
   const [isFilterOpen, setIsFilterOpen] = useState(false);
   const [sortBy, setSortBy] = useState("popularity");
   const { addToCart, addToWishlist, isInWishlist, getCartCount } = useCart();
+  const { isLoggedIn, requireAuth } = useAuth();
 
   const toggleDarkMode = () => {
     setIsDarkMode(!isDarkMode);
