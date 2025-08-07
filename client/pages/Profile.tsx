@@ -501,40 +501,40 @@ export default function Profile() {
                     <label className="block text-sm font-medium mb-2">First Name</label>
                     <input
                       type="text"
-                      value={user.firstName}
+                      value={isEditing ? editedUser.firstName : user.firstName}
+                      onChange={(e) => isEditing && setEditedUser(prev => ({ ...prev, firstName: e.target.value }))}
                       className="w-full px-3 py-2 border border-border rounded-lg"
                       disabled={!isEditing}
-                      readOnly
                     />
                   </div>
                   <div>
                     <label className="block text-sm font-medium mb-2">Last Name</label>
                     <input
                       type="text"
-                      value={user.lastName}
+                      value={isEditing ? editedUser.lastName : user.lastName}
+                      onChange={(e) => isEditing && setEditedUser(prev => ({ ...prev, lastName: e.target.value }))}
                       className="w-full px-3 py-2 border border-border rounded-lg"
                       disabled={!isEditing}
-                      readOnly
                     />
                   </div>
                   <div>
                     <label className="block text-sm font-medium mb-2">Email</label>
                     <input
                       type="email"
-                      value={user.email}
+                      value={isEditing ? editedUser.email : user.email}
+                      onChange={(e) => isEditing && setEditedUser(prev => ({ ...prev, email: e.target.value }))}
                       className="w-full px-3 py-2 border border-border rounded-lg"
                       disabled={!isEditing}
-                      readOnly
                     />
                   </div>
                   <div>
                     <label className="block text-sm font-medium mb-2">Phone</label>
                     <input
                       type="tel"
-                      value={user.phone}
+                      value={isEditing ? editedUser.phone : user.phone}
+                      onChange={(e) => isEditing && setEditedUser(prev => ({ ...prev, phone: e.target.value }))}
                       className="w-full px-3 py-2 border border-border rounded-lg"
                       disabled={!isEditing}
-                      readOnly
                     />
                   </div>
                 </div>
