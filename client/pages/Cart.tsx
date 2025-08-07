@@ -12,6 +12,19 @@ export default function Cart() {
   const [couponCode, setCouponCode] = useState("");
   const [pincode, setPincode] = useState("");
   const { cartItems, updateQuantity, removeFromCart, getCartCount, getCartTotal } = useCart();
+  const { isLoggedIn, user } = useAuth();
+
+  // Redirect to login if not logged in
+  useEffect(() => {
+    if (!isLoggedIn) {
+      window.location.href = '/login';
+    }
+  }, [isLoggedIn]);
+
+  // Don't render anything if not logged in
+  if (!isLoggedIn) {
+    return null;
+  }
 
   const toggleDarkMode = () => {
     setIsDarkMode(!isDarkMode);
