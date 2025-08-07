@@ -11,6 +11,24 @@ export default function Checkout() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [selectedPayment, setSelectedPayment] = useState("upi");
   const [orderPlaced, setOrderPlaced] = useState(false);
+  const [formData, setFormData] = useState({
+    firstName: "",
+    lastName: "",
+    phone: "",
+    email: "",
+    address: "",
+    city: "",
+    state: "",
+    pincode: "",
+    landmark: ""
+  });
+  const [paymentData, setPaymentData] = useState({
+    upiId: "",
+    cardNumber: "",
+    cardExpiry: "",
+    cardCvv: "",
+    cardName: ""
+  });
   const { isLoggedIn, user } = useAuth();
 
   // Redirect to login if not logged in
@@ -24,26 +42,6 @@ export default function Checkout() {
   if (!isLoggedIn) {
     return null;
   }
-  
-  const [formData, setFormData] = useState({
-    firstName: "",
-    lastName: "",
-    phone: "",
-    email: "",
-    address: "",
-    city: "",
-    state: "",
-    pincode: "",
-    landmark: ""
-  });
-
-  const [paymentData, setPaymentData] = useState({
-    upiId: "",
-    cardNumber: "",
-    cardExpiry: "",
-    cardCvv: "",
-    cardName: ""
-  });
 
   const toggleDarkMode = () => {
     setIsDarkMode(!isDarkMode);
