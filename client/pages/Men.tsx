@@ -181,9 +181,17 @@ export default function Men() {
                   )}
                 </Link>
               </Button>
-              <Button variant="ghost" size="icon">
-                <User className="h-5 w-5" />
-              </Button>
+              {isLoggedIn ? (
+                <Button variant="ghost" size="icon" asChild>
+                  <Link to="/profile">
+                    <User className="h-5 w-5" />
+                  </Link>
+                </Button>
+              ) : (
+                <Button variant="ghost" asChild>
+                  <Link to="/login">Login</Link>
+                </Button>
+              )}
               <Button
                 variant="ghost"
                 size="icon"
