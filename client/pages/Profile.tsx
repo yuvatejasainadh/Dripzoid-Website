@@ -28,10 +28,28 @@ export default function Profile() {
     }
   }, [isLoggedIn]);
 
+  // Initialize edit form with user data
+  useEffect(() => {
+    if (user) {
+      setEditedUser({
+        firstName: user.firstName,
+        lastName: user.lastName,
+        email: user.email,
+        phone: user.phone
+      });
+    }
+  }, [user]);
+
   // Don't render anything if not logged in
   if (!isLoggedIn || !user) {
     return null;
   }
+
+  const handleSaveProfile = () => {
+    // In a real app, this would make an API call to update the user
+    alert('Profile updated successfully! (Demo mode - changes not persisted)');
+    setIsEditing(false);
+  };
 
   const toggleDarkMode = () => {
     setIsDarkMode(!isDarkMode);
