@@ -82,41 +82,6 @@ export default function Profile() {
     }
   ];
 
-  const wishlistItems = [
-    {
-      id: 1,
-      name: "Denim Bomber Jacket",
-      brand: "DRIPZOID",
-      price: 2499,
-      originalPrice: 3499,
-      image: "https://images.unsplash.com/photo-1544966503-7cc5ac882d5c?w=300&h=300&fit=crop",
-      rating: 4.8,
-      discount: 29,
-      inStock: true
-    },
-    {
-      id: 2,
-      name: "Sweat Shorts",
-      brand: "DRIPZOID",
-      price: 899,
-      originalPrice: 1199,
-      image: "https://images.unsplash.com/photo-1591195853828-11db59a44f6b?w=300&h=300&fit=crop",
-      rating: 4.2,
-      discount: 25,
-      inStock: false
-    },
-    {
-      id: 3,
-      name: "Oversized Tank Top",
-      brand: "DRIPZOID",
-      price: 699,
-      originalPrice: 999,
-      image: "https://images.unsplash.com/photo-1618354691373-d851c5c3a990?w=300&h=300&fit=crop",
-      rating: 4.4,
-      discount: 30,
-      inStock: true
-    }
-  ];
 
   const addresses = [
     {
