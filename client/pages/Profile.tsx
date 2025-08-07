@@ -12,14 +12,20 @@ export default function Profile() {
   const [isDarkMode, setIsDarkMode] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isEditing, setIsEditing] = useState(false);
-  const [profileData, setProfileData] = useState({
-    firstName: "Arjun",
-    lastName: "Kumar",
-    email: "arjun@example.com",
-    phone: "+91 9876543210",
-    avatar: ""
-  });
   const { wishlistItems, addToCart, removeFromWishlist, getCartCount } = useCart();
+  const { isLoggedIn, user, logout } = useAuth();
+
+  // Redirect to login if not logged in
+  useEffect(() => {
+    if (!isLoggedIn) {
+      window.location.href = '/login';
+    }
+  }, [isLoggedIn]);
+
+  // Don't render anything if not logged in
+  if (!isLoggedIn || !user) {
+    return null;
+  }
 
   const toggleDarkMode = () => {
     setIsDarkMode(!isDarkMode);
