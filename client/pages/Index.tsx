@@ -70,9 +70,11 @@ export default function Index() {
           <div className="flex items-center justify-between h-16">
             {/* Logo */}
             <Link to="/" className="flex items-center space-x-2">
-              <div className="text-2xl font-bold text-brand-brown">
-                DRIPZOID
-              </div>
+              <img
+                src="https://cdn.builder.io/api/v1/assets/cb420c754f164cb09479ca8042848804/1754575128006-fef9ca?format=webp&width=800"
+                alt="DRIPZOID"
+                className="h-8 w-auto"
+              />
             </Link>
 
             {/* Desktop Navigation */}
@@ -148,9 +150,11 @@ export default function Index() {
       <section className="relative h-[70vh] flex items-center justify-center bg-gradient-to-br from-brand-cream to-background">
         <div className="absolute inset-0 bg-black/20"></div>
         <div className="relative z-10 text-center px-4 max-w-4xl mx-auto">
-          <div className="text-6xl md:text-8xl font-bold text-brand-brown mb-4">
-            DRIPZOID
-          </div>
+          <img
+            src="https://cdn.builder.io/api/v1/assets/cb420c754f164cb09479ca8042848804/1754575128006-fef9ca?format=webp&width=800"
+            alt="DRIPZOID"
+            className="h-20 md:h-32 w-auto mx-auto mb-4"
+          />
           <h1 className="text-2xl md:text-4xl font-bold text-brand-dark mb-6">
             STYLE THAT POPS
           </h1>
@@ -303,7 +307,11 @@ export default function Index() {
         <div className="container mx-auto">
           <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
             <div>
-              <div className="text-2xl font-bold text-brand-brown mb-4">DRIPZOID</div>
+              <img
+                src="https://cdn.builder.io/api/v1/assets/cb420c754f164cb09479ca8042848804/1754575128006-fef9ca?format=webp&width=800"
+                alt="DRIPZOID"
+                className="h-8 w-auto mb-4"
+              />
               <p className="text-muted-foreground">
                 India's favorite streetwear brand for Gen Z fashion lovers.
               </p>
