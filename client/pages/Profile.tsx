@@ -275,11 +275,14 @@ export default function Profile() {
           <div className="flex gap-2">
             <Button
               variant="outline"
-              onClick={() => setIsEditing(!isEditing)}
+              onClick={() => {
+                console.log('Edit button clicked, current isEditing:', isEditing);
+                setIsEditing(!isEditing);
+              }}
               className="flex items-center gap-2"
             >
               <Edit className="h-4 w-4" />
-              Edit Profile
+              {isEditing ? 'Cancel Edit' : 'Edit Profile'}
             </Button>
             <Button
               variant="destructive"
