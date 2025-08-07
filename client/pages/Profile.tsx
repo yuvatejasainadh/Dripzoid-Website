@@ -206,8 +206,15 @@ export default function Profile() {
               <Button variant="ghost" size="icon">
                 <Heart className="h-5 w-5" />
               </Button>
-              <Button variant="ghost" size="icon">
-                <ShoppingBag className="h-5 w-5" />
+              <Button variant="ghost" size="icon" asChild className="relative">
+                <Link to="/cart">
+                  <ShoppingBag className="h-5 w-5" />
+                  {getCartCount() > 0 && (
+                    <Badge className="absolute -top-2 -right-2 h-5 w-5 flex items-center justify-center p-0 bg-neon-blue text-neon-foreground text-xs">
+                      {getCartCount()}
+                    </Badge>
+                  )}
+                </Link>
               </Button>
               <Button variant="ghost" size="icon" className="text-neon-blue">
                 <User className="h-5 w-5" />
