@@ -187,8 +187,8 @@ export default function Index() {
           <p className="text-lg md:text-xl text-muted-foreground mb-8 max-w-2xl mx-auto">
             Discover the latest streetwear trends designed for Indian youth. From oversized hoodies to statement pieces.
           </p>
-          <Button 
-            className="bg-neon-blue hover:bg-neon-blue/90 text-neon-foreground text-lg px-8 py-6 h-auto font-semibold"
+          <Button
+            className="bg-neon-blue hover:bg-neon-blue/90 text-neon-foreground px-6 py-3 font-semibold"
             asChild
           >
             <Link to="/men">SHOP NOW</Link>
