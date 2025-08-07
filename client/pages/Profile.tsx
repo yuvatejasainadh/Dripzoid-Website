@@ -474,40 +474,40 @@ export default function Profile() {
                     <label className="block text-sm font-medium mb-2">First Name</label>
                     <input
                       type="text"
-                      value={profileData.firstName}
-                      onChange={(e) => setProfileData(prev => ({ ...prev, firstName: e.target.value }))}
+                      value={user.firstName}
                       className="w-full px-3 py-2 border border-border rounded-lg"
                       disabled={!isEditing}
+                      readOnly
                     />
                   </div>
                   <div>
                     <label className="block text-sm font-medium mb-2">Last Name</label>
                     <input
                       type="text"
-                      value={profileData.lastName}
-                      onChange={(e) => setProfileData(prev => ({ ...prev, lastName: e.target.value }))}
+                      value={user.lastName}
                       className="w-full px-3 py-2 border border-border rounded-lg"
                       disabled={!isEditing}
+                      readOnly
                     />
                   </div>
                   <div>
                     <label className="block text-sm font-medium mb-2">Email</label>
                     <input
                       type="email"
-                      value={profileData.email}
-                      onChange={(e) => setProfileData(prev => ({ ...prev, email: e.target.value }))}
+                      value={user.email}
                       className="w-full px-3 py-2 border border-border rounded-lg"
                       disabled={!isEditing}
+                      readOnly
                     />
                   </div>
                   <div>
                     <label className="block text-sm font-medium mb-2">Phone</label>
                     <input
                       type="tel"
-                      value={profileData.phone}
-                      onChange={(e) => setProfileData(prev => ({ ...prev, phone: e.target.value }))}
+                      value={user.phone}
                       className="w-full px-3 py-2 border border-border rounded-lg"
                       disabled={!isEditing}
+                      readOnly
                     />
                   </div>
                 </div>
