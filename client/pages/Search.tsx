@@ -3,6 +3,7 @@ import { Link, useSearchParams } from "react-router-dom";
 import { ShoppingBag, Heart, Search, User, Menu, Moon, Sun, Star, Filter, SlidersHorizontal, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
+import { useCart } from "../context/CartContext";
 
 export default function SearchResults() {
   const [searchParams, setSearchParams] = useSearchParams();
