@@ -540,8 +540,27 @@ export default function Profile() {
                 </div>
                 {isEditing && (
                   <div className="flex gap-2 mt-4">
-                    <Button className="bg-neon-blue hover:bg-neon-blue/90">Save Changes</Button>
-                    <Button variant="outline" onClick={() => setIsEditing(false)}>Cancel</Button>
+                    <Button
+                      className="bg-neon-blue hover:bg-neon-blue/90"
+                      onClick={handleSaveProfile}
+                    >
+                      Save Changes
+                    </Button>
+                    <Button
+                      variant="outline"
+                      onClick={() => {
+                        setIsEditing(false);
+                        // Reset edited data to original user data
+                        setEditedUser({
+                          firstName: user.firstName,
+                          lastName: user.lastName,
+                          email: user.email,
+                          phone: user.phone
+                        });
+                      }}
+                    >
+                      Cancel
+                    </Button>
                   </div>
                 )}
               </div>
