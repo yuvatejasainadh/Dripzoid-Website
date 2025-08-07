@@ -27,9 +27,11 @@ export default function Women() {
           <div className="flex items-center justify-between h-16">
             {/* Logo */}
             <Link to="/" className="flex items-center space-x-2">
-              <div className="text-2xl font-bold text-brand-brown">
-                DRIPZOID
-              </div>
+              <img
+                src="https://cdn.builder.io/api/v1/assets/cb420c754f164cb09479ca8042848804/1754575128006-fef9ca?format=webp&width=800"
+                alt="DRIPZOID"
+                className="h-8 w-auto"
+              />
             </Link>
 
             {/* Desktop Navigation */}
