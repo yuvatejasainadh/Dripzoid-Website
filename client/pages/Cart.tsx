@@ -24,21 +24,7 @@ export default function Cart() {
     { name: "ACCESSORIES", path: "/accessories", available: false }
   ];
 
-  const updateQuantity = (id: number, newQuantity: number) => {
-    if (newQuantity <= 0) {
-      removeItem(id);
-      return;
-    }
-    setCartItems(items => 
-      items.map(item => 
-        item.id === id ? { ...item, quantity: newQuantity } : item
-      )
-    );
-  };
-
-  const removeItem = (id: number) => {
-    setCartItems(items => items.filter(item => item.id !== id));
-  };
+  // Functions now come from cart context
 
   const applyCoupon = () => {
     if (couponCode.toLowerCase() === 'dripzoid10') {
