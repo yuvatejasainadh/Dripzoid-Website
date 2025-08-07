@@ -281,7 +281,7 @@ export default function Index() {
                       className="flex-1 bg-neon-blue hover:bg-neon-blue/90 text-neon-foreground"
                       onClick={(e) => {
                         e.preventDefault();
-                        alert(`Added ${product.name} to cart!`);
+                        addToCart(product);
                       }}
                     >
                       Add to Cart
@@ -388,7 +388,7 @@ export default function Index() {
           </div>
           
           <div className="border-t border-border mt-8 pt-8 text-center text-muted-foreground">
-            <p>&copy; 2024 DRIPZOID. All rights reserved. Made in India 🇮����</p>
+            <p>&copy; 2024 DRIPZOID. All rights reserved. Made in India 🇮🇳</p>
           </div>
         </div>
       </footer>
