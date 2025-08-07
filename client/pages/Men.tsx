@@ -342,11 +342,10 @@ export default function Men() {
                         onClick={(e) => {
                           e.preventDefault();
                           e.stopPropagation();
-                          // Toggle wishlist functionality
-                          alert('Added to wishlist!');
+                          addToWishlist(product);
                         }}
                       >
-                        <Heart className="h-4 w-4" />
+                        <Heart className={`h-4 w-4 ${isInWishlist(product.id) ? 'fill-red-500 text-red-500' : ''}`} />
                       </Button>
                     </div>
                   </Link>
