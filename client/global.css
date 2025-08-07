@@ -101,6 +101,15 @@
     --sidebar-accent-foreground: 240 4.8% 95.9%;
     --sidebar-border: 240 3.7% 15.9%;
     --sidebar-ring: 217.2 91.2% 59.8%;
+
+    /* DRIPZOID Dark Mode Brand Colors */
+    --neon: 190 100% 60%;
+    --neon-foreground: 0 0% 0%;
+    --neon-blue: 190 100% 60%;
+    --neon-green: 120 100% 60%;
+    --brand-brown: 28 46% 50%;
+    --brand-cream: 35 25% 15%;
+    --brand-dark: 0 0% 5%;
   }
 }
 
