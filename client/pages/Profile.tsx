@@ -40,6 +40,13 @@ export default function Profile() {
     }
   }, [user]);
 
+  // Handle hash navigation for wishlist
+  useEffect(() => {
+    if (window.location.hash === '#wishlist') {
+      setActiveTab('wishlist');
+    }
+  }, []);
+
   // Don't render anything if not logged in
   if (!isLoggedIn || !user) {
     return null;
