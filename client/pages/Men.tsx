@@ -313,64 +313,67 @@ export default function Men() {
           <main className="flex-1">
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
               {products.map((product) => (
-                <div key={product.id} className="group cursor-pointer">
-                  <div className="relative overflow-hidden rounded-lg mb-4 aspect-square">
-                    <img 
-                      src={product.image} 
-                      alt={product.name}
-                      className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
-                    />
-                    {product.discount && (
-                      <div className="absolute top-2 left-2 bg-neon-blue text-neon-foreground px-2 py-1 rounded text-sm font-semibold">
-                        {product.discount}% OFF
-                      </div>
-                    )}
-                    <Button 
-                      variant="ghost" 
-                      size="icon" 
-                      className="absolute top-2 right-2 bg-white/80 hover:bg-white"
-                    >
-                      <Heart className="h-4 w-4" />
-                    </Button>
-                    
-                    {/* Quick Shop Overlay */}
-                    <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
-                      <Button className="bg-neon-blue hover:bg-neon-blue/90 text-neon-foreground">
-                        Quick Shop
+                <div key={product.id} className="group">
+                  <Link to={`/product/${product.id}`}>
+                    <div className="relative overflow-hidden rounded-lg mb-4 aspect-square">
+                      <img
+                        src={product.image}
+                        alt={product.name}
+                        className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+                      />
+                      {product.discount && (
+                        <div className="absolute top-2 left-2 bg-neon-blue text-neon-foreground px-2 py-1 rounded text-sm font-semibold">
+                          {product.discount}% OFF
+                        </div>
+                      )}
+                      <Button
+                        variant="ghost"
+                        size="icon"
+                        className="absolute top-2 right-2 bg-white/80 hover:bg-white"
+                        onClick={(e) => {
+                          e.preventDefault();
+                          e.stopPropagation();
+                          // Toggle wishlist functionality
+                          alert('Added to wishlist!');
+                        }}
+                      >
+                        <Heart className="h-4 w-4" />
                       </Button>
                     </div>
-                  </div>
-                  
+                  </Link>
+
                   <div>
                     <p className="text-xs text-muted-foreground mb-1">{product.brand}</p>
-                    <h3 className="font-semibold text-lg mb-1">{product.name}</h3>
-                    
+                    <Link to={`/product/${product.id}`}>
+                      <h3 className="font-semibold text-lg mb-1 hover:text-neon-blue">{product.name}</h3>
+                    </Link>
+
                     <div className="flex items-center gap-1 mb-2">
                       {[...Array(5)].map((_, i) => (
-                        <Star 
-                          key={i} 
+                        <Star
+                          key={i}
                           className={`h-4 w-4 ${
-                            i < Math.floor(product.rating) 
-                              ? 'fill-neon-blue text-neon-blue' 
+                            i < Math.floor(product.rating)
+                              ? 'fill-neon-blue text-neon-blue'
                               : 'text-muted-foreground'
-                          }`} 
+                          }`}
                         />
                       ))}
                       <span className="text-sm text-muted-foreground ml-1">
                         ({product.rating}) • {product.reviews} reviews
                       </span>
                     </div>
-                    
-                    <div className="flex items-center gap-2 mb-2">
+
+                    <div className="flex items-center gap-2 mb-3">
                       <span className="text-lg font-bold">₹{product.price}</span>
                       {product.originalPrice && (
                         <span className="text-sm text-muted-foreground line-through">₹{product.originalPrice}</span>
                       )}
                     </div>
-                    
-                    <div className="flex flex-wrap gap-1">
+
+                    <div className="flex flex-wrap gap-1 mb-3">
                       {product.colors.slice(0, 3).map(color => (
-                        <div 
+                        <div
                           key={color}
                           className="w-4 h-4 rounded-full border border-border"
                           style={{ backgroundColor: color.toLowerCase() }}
@@ -380,6 +383,30 @@ export default function Men() {
                       {product.colors.length > 3 && (
                         <span className="text-xs text-muted-foreground">+{product.colors.length - 3}</span>
                       )}
+                    </div>
+
+                    {/* Add to Cart and Buy Now buttons */}
+                    <div className="flex gap-2">
+                      <Button
+                        className="flex-1 bg-neon-blue hover:bg-neon-blue/90 text-neon-foreground"
+                        onClick={(e) => {
+                          e.preventDefault();
+                          alert(`Added ${product.name} to cart!`);
+                        }}
+                      >
+                        Add to Cart
+                      </Button>
+                      <Button
+                        variant="outline"
+                        className="flex-1"
+                        onClick={(e) => {
+                          e.preventDefault();
+                          // Navigate to checkout with this product
+                          window.location.href = '/checkout';
+                        }}
+                      >
+                        Buy Now
+                      </Button>
                     </div>
                   </div>
                 </div>
