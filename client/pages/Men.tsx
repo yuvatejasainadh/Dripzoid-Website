@@ -10,6 +10,7 @@ export default function Men() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isFilterOpen, setIsFilterOpen] = useState(false);
   const [sortBy, setSortBy] = useState("popularity");
+  const { addToCart, addToWishlist, isInWishlist, getCartCount } = useCart();
 
   const toggleDarkMode = () => {
     setIsDarkMode(!isDarkMode);
