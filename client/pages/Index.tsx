@@ -174,11 +174,14 @@ export default function Index() {
         <div className="absolute inset-0 bg-black/20"></div>
         <div className="relative z-10 text-center px-4 max-w-4xl mx-auto">
           <img
-            src="https://cdn.builder.io/api/v1/assets/cb420c754f164cb09479ca8042848804/1754575128006-fef9ca?format=webp&width=800"
+            src={isDarkMode
+              ? "https://cdn.builder.io/api/v1/image/assets%2Fcb420c754f164cb09479ca8042848804%2Fcedb9b0fffa847569c81aa40025b5357?format=webp&width=800"
+              : "https://cdn.builder.io/api/v1/image/assets%2Fcb420c754f164cb09479ca8042848804%2Fb536f9a54dea43a38ce36553002f4bc2?format=webp&width=800"
+            }
             alt="DRIPZOID"
             className="h-32 md:h-48 w-auto mx-auto mb-4"
           />
-          <h1 className="text-2xl md:text-4xl font-bold text-brand-dark mb-6">
+          <h1 className="text-2xl md:text-4xl font-bold text-foreground mb-6">
             STYLE THAT POPS
           </h1>
           <p className="text-lg md:text-xl text-muted-foreground mb-8 max-w-2xl mx-auto">
