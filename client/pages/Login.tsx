@@ -1,8 +1,9 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { Moon, Sun, Smartphone, Mail, ArrowRight, ArrowLeft, CheckCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { useAuth } from "../context/AuthContext";
 
 export default function Login() {
   const [isDarkMode, setIsDarkMode] = useState(false);
