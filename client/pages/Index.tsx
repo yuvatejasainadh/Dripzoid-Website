@@ -313,16 +313,14 @@ export default function Index() {
                     <Button
                       variant="outline"
                       className="flex-1"
-                      asChild
-                    >
-                      <Link to="/checkout" onClick={(e) => {
+                      onClick={(e) => {
                         e.preventDefault();
                         if (requireAuth()) {
                           window.location.href = '/checkout';
                         }
-                      }}>
-                        Buy Now
-                      </Link>
+                      }}
+                    >
+                      Buy Now
                     </Button>
                   </div>
                 </div>
