@@ -11,6 +11,13 @@ import Men from "./pages/Men";
 import Women from "./pages/Women";
 import Kids from "./pages/Kids";
 import Accessories from "./pages/Accessories";
+import ProductDetails from "./pages/ProductDetails";
+import Cart from "./pages/Cart";
+import Checkout from "./pages/Checkout";
+import Login from "./pages/Login";
+import Signup from "./pages/Signup";
+import Profile from "./pages/Profile";
+import Search from "./pages/Search";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
