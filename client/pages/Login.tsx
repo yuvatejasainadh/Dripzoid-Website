@@ -96,9 +96,12 @@ export default function Login() {
           <div className="flex items-center justify-between h-16">
             {/* Logo */}
             <Link to="/" className="flex items-center space-x-2">
-              <img 
-                src="https://cdn.builder.io/api/v1/assets/cb420c754f164cb09479ca8042848804/1754575128006-fef9ca?format=webp&width=800" 
-                alt="DRIPZOID" 
+              <img
+                src={isDarkMode
+                  ? "https://cdn.builder.io/api/v1/image/assets%2Fcb420c754f164cb09479ca8042848804%2Fcedb9b0fffa847569c81aa40025b5357?format=webp&width=800"
+                  : "https://cdn.builder.io/api/v1/image/assets%2Fcb420c754f164cb09479ca8042848804%2Fb536f9a54dea43a38ce36553002f4bc2?format=webp&width=800"
+                }
+                alt="DRIPZOID"
                 className="h-12 w-auto"
               />
             </Link>
