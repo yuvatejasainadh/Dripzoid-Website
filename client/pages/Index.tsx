@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { useCart } from "../context/CartContext";
 import { useAuth } from "../context/AuthContext";
+import SearchBar from "../components/SearchBar";
 
 export default function Index() {
   const [isDarkMode, setIsDarkMode] = useState(false);
