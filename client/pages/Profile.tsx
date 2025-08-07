@@ -12,6 +12,12 @@ export default function Profile() {
   const [isDarkMode, setIsDarkMode] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isEditing, setIsEditing] = useState(false);
+  const [editedUser, setEditedUser] = useState({
+    firstName: "",
+    lastName: "",
+    email: "",
+    phone: ""
+  });
   const { wishlistItems, addToCart, removeFromWishlist, getCartCount } = useCart();
   const { isLoggedIn, user, logout } = useAuth();
 
