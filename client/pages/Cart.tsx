@@ -38,7 +38,7 @@ export default function Cart() {
 
   const checkDelivery = () => {
     if (pincode.length === 6) {
-      alert(`Delivery available to ${pincode}. Free delivery on orders above ��999!`);
+      alert(`Delivery available to ${pincode}. Free delivery on orders above ₹999!`);
     } else {
       alert('Please enter a valid 6-digit PIN code');
     }
@@ -191,10 +191,10 @@ export default function Cart() {
                             <span>Color: {item.color}</span>
                           </div>
                         </div>
-                        <Button 
-                          variant="ghost" 
+                        <Button
+                          variant="ghost"
                           size="icon"
-                          onClick={() => removeItem(item.id)}
+                          onClick={() => removeFromCart(item.id)}
                           className="text-red-500 hover:text-red-700 hover:bg-red-50"
                         >
                           <Trash2 className="h-4 w-4" />
