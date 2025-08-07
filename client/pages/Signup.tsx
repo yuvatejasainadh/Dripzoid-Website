@@ -208,10 +208,10 @@ export default function Signup() {
                       />
                     </div>
 
-                    <Button 
+                    <Button
                       onClick={sendOTP}
                       className="w-full bg-neon-blue hover:bg-neon-blue/90 text-neon-foreground"
-                      disabled={!formData.firstName.trim() || formData.phoneNumber.length !== 10}
+                      disabled={!formData.firstName.trim() || !formData.lastName.trim() || formData.phoneNumber.length !== 10}
                     >
                       Send OTP
                       <ArrowRight className="h-4 w-4 ml-2" />
