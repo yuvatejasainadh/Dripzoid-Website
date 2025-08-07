@@ -4,6 +4,7 @@ import { ShoppingBag, Heart, Search, User, Menu, Moon, Sun, Star } from "lucide-
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { useCart } from "../context/CartContext";
+import { useAuth } from "../context/AuthContext";
 
 export default function Index() {
   const [isDarkMode, setIsDarkMode] = useState(false);
