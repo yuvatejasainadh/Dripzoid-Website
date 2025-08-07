@@ -38,7 +38,7 @@ export default function Cart() {
 
   const checkDelivery = () => {
     if (pincode.length === 6) {
-      alert(`Delivery available to ${pincode}. Free delivery on orders above ₹999!`);
+      alert(`Delivery available to ${pincode}. Free delivery on orders above ��999!`);
     } else {
       alert('Please enter a valid 6-digit PIN code');
     }
@@ -164,7 +164,7 @@ export default function Cart() {
               <div className="flex items-center justify-between mb-6">
                 <h1 className="text-2xl font-bold">Shopping Cart</h1>
                 <p className="text-muted-foreground">
-                  {cartItems.reduce((sum, item) => sum + item.quantity, 0)} items
+                  {getCartCount()} items
                 </p>
               </div>
 
