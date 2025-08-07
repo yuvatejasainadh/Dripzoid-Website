@@ -1,7 +1,8 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import { ShoppingBag, Heart, Search, User, Menu, Moon, Sun } from "lucide-react";
+import { ShoppingBag, Heart, User, Menu, Moon, Sun } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import SearchBar from "../components/SearchBar";
 
 export default function Kids() {
   const [isDarkMode, setIsDarkMode] = useState(false);
@@ -15,8 +16,7 @@ export default function Kids() {
   const categories = [
     { name: "MEN", path: "/men", available: true },
     { name: "WOMEN", path: "/women", available: true },
-    { name: "KIDS", path: "/kids", available: false },
-    { name: "ACCESSORIES", path: "/accessories", available: false }
+    { name: "KIDS", path: "/kids", available: false }
   ];
 
   return (
@@ -44,8 +44,8 @@ export default function Kids() {
                   key={category.name}
                   to={category.path}
                   className={`text-sm font-medium transition-colors ${
-                    category.available 
-                      ? "text-foreground hover:text-neon-blue" 
+                    category.available
+                      ? "text-foreground hover:text-neon-blue"
                       : "text-muted-foreground cursor-not-allowed"
                   } ${category.name === "KIDS" ? "text-neon-blue" : ""}`}
                 >
@@ -53,15 +53,13 @@ export default function Kids() {
                   {!category.available && <span className="ml-1 text-xs">(Soon)</span>}
                 </Link>
               ))}
+              <SearchBar className="w-64" placeholder="Search kids products..." />
             </nav>
 
             {/* Right side actions */}
             <div className="flex items-center space-x-4">
               <Button variant="ghost" size="icon" onClick={toggleDarkMode}>
                 {isDarkMode ? <Sun className="h-5 w-5" /> : <Moon className="h-5 w-5" />}
-              </Button>
-              <Button variant="ghost" size="icon">
-                <Search className="h-5 w-5" />
               </Button>
               <Button variant="ghost" size="icon">
                 <Heart className="h-5 w-5" />
