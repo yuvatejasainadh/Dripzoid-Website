@@ -44,8 +44,8 @@ export default function Cart() {
     }
   };
 
-  const subtotal = cartItems.reduce((sum, item) => sum + (item.price * item.quantity), 0);
-  const originalTotal = cartItems.reduce((sum, item) => sum + (item.originalPrice * item.quantity), 0);
+  const subtotal = getCartTotal();
+  const originalTotal = cartItems.reduce((sum, item) => sum + ((item.originalPrice || item.price) * item.quantity), 0);
   const totalSavings = originalTotal - subtotal;
   const deliveryCharge = subtotal >= 999 ? 0 : 99;
   const total = subtotal + deliveryCharge;
