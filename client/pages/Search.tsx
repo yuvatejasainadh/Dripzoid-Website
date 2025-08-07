@@ -14,6 +14,7 @@ export default function SearchResults() {
   const [searchQuery, setSearchQuery] = useState(searchParams.get('q') || '');
   const [sortBy, setSortBy] = useState("relevance");
   const { addToCart, addToWishlist, isInWishlist, getCartCount } = useCart();
+  const { isLoggedIn, requireAuth } = useAuth();
 
   const toggleDarkMode = () => {
     setIsDarkMode(!isDarkMode);
