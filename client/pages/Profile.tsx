@@ -304,7 +304,7 @@ export default function Profile() {
         </div>
 
         {/* Profile Tabs */}
-        <Tabs defaultValue="orders" className="space-y-6">
+        <Tabs value={activeTab} onValueChange={setActiveTab} className="space-y-6">
           <TabsList className="grid w-full grid-cols-4">
             <TabsTrigger value="orders" className="flex items-center gap-2">
               <Package className="h-4 w-4" />
