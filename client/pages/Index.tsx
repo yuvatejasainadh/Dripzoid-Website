@@ -244,10 +244,10 @@ export default function Index() {
                       onClick={(e) => {
                         e.preventDefault();
                         e.stopPropagation();
-                        alert('Added to wishlist!');
+                        addToWishlist(product);
                       }}
                     >
-                      <Heart className="h-4 w-4" />
+                      <Heart className={`h-4 w-4 ${isInWishlist(product.id) ? 'fill-red-500 text-red-500' : ''}`} />
                     </Button>
                   </div>
                 </Link>
@@ -388,7 +388,7 @@ export default function Index() {
           </div>
           
           <div className="border-t border-border mt-8 pt-8 text-center text-muted-foreground">
-            <p>&copy; 2024 DRIPZOID. All rights reserved. Made in India 🇮🇳</p>
+            <p>&copy; 2024 DRIPZOID. All rights reserved. Made in India 🇮����</p>
           </div>
         </div>
       </footer>
