@@ -18,6 +18,14 @@ export default function Signup() {
   const [otp, setOtp] = useState("");
   const [step, setStep] = useState("input"); // input, otp, success
   const [signupMethod, setSignupMethod] = useState("phone");
+  const { login, isLoggedIn } = useAuth();
+
+  // Redirect if already logged in
+  useEffect(() => {
+    if (isLoggedIn) {
+      window.location.href = '/';
+    }
+  }, [isLoggedIn]);
 
   const toggleDarkMode = () => {
     setIsDarkMode(!isDarkMode);
