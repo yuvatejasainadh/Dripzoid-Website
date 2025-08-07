@@ -39,6 +39,15 @@
 
     --radius: 0.5rem;
 
+    /* DRIPZOID Brand Colors */
+    --neon: 190 100% 50%;
+    --neon-foreground: 0 0% 0%;
+    --neon-blue: 190 100% 50%;
+    --neon-green: 120 100% 50%;
+    --brand-brown: 28 46% 40%;
+    --brand-cream: 35 25% 90%;
+    --brand-dark: 0 0% 10%;
+
     --sidebar-background: 0 0% 98%;
 
     --sidebar-foreground: 240 5.3% 26.1%;
