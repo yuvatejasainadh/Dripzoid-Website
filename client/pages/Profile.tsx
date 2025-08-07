@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { ShoppingBag, Heart, Search, User, Menu, Moon, Sun, Package, MapPin, CreditCard, Bell, LogOut, Star, Truck, RotateCcw, Edit, Plus } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -6,7 +6,6 @@ import { Badge } from "@/components/ui/badge";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { useCart } from "../context/CartContext";
 import { useAuth } from "../context/AuthContext";
-import { useEffect } from "react";
 
 export default function Profile() {
   const [isDarkMode, setIsDarkMode] = useState(false);
