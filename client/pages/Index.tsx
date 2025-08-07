@@ -254,7 +254,9 @@ export default function Index() {
                       onClick={(e) => {
                         e.preventDefault();
                         e.stopPropagation();
-                        addToWishlist(product);
+                        if (requireAuth()) {
+                          addToWishlist(product);
+                        }
                       }}
                     >
                       <Heart className={`h-4 w-4 ${isInWishlist(product.id) ? 'fill-red-500 text-red-500' : ''}`} />
