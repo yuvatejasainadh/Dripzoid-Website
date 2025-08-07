@@ -48,9 +48,18 @@ export default function Login() {
 
   const verifyOTP = () => {
     if (otp === "123456") {
+      // Create user data for login
+      const userData = {
+        id: "demo_user_" + Date.now(),
+        firstName: loginMethod === "phone" ? "Demo" : email.split("@")[0],
+        lastName: "User",
+        email: loginMethod === "phone" ? `${phoneNumber}@example.com` : email,
+        phone: loginMethod === "phone" ? `+91 ${phoneNumber}` : "+91 9876543210"
+      };
+
+      login(userData);
       setStep("success");
       setTimeout(() => {
-        // Redirect to home page
         window.location.href = "/";
       }, 2000);
     } else {
