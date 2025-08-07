@@ -25,8 +25,7 @@ export default function SearchResults() {
   const categories = [
     { name: "MEN", path: "/men", available: true },
     { name: "WOMEN", path: "/women", available: true },
-    { name: "KIDS", path: "/kids", available: false },
-    { name: "ACCESSORIES", path: "/accessories", available: false }
+    { name: "KIDS", path: "/kids", available: false }
   ];
 
   // Mock search results - in real app, this would come from API
