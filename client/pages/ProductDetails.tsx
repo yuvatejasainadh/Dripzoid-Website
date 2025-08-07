@@ -1,6 +1,23 @@
 import { useState } from "react";
 import { Link, useParams } from "react-router-dom";
-import { ShoppingBag, Heart, Search, User, Menu, Moon, Sun, Star, Plus, Minus, Truck, Shield, RotateCcw, MapPin, ChevronLeft, ChevronRight } from "lucide-react";
+import {
+  ShoppingBag,
+  Heart,
+  Search,
+  User,
+  Menu,
+  Moon,
+  Sun,
+  Star,
+  Plus,
+  Minus,
+  Truck,
+  Shield,
+  RotateCcw,
+  MapPin,
+  ChevronLeft,
+  ChevronRight,
+} from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
@@ -18,13 +35,13 @@ export default function ProductDetails() {
 
   const toggleDarkMode = () => {
     setIsDarkMode(!isDarkMode);
-    document.documentElement.classList.toggle('dark');
+    document.documentElement.classList.toggle("dark");
   };
 
   const categories = [
     { name: "MEN", path: "/men", available: true },
     { name: "WOMEN", path: "/women", available: true },
-    { name: "KIDS", path: "/kids", available: false }
+    { name: "KIDS", path: "/kids", available: false },
   ];
 
   // Mock product data (in real app, this would come from API/props)
@@ -37,7 +54,8 @@ export default function ProductDetails() {
     discount: 33,
     rating: 4.5,
     reviews: 128,
-    description: "Elevate your streetwear game with our signature oversized hoodie. Crafted from premium cotton blend with a soft fleece interior, this hoodie offers unmatched comfort and style. Perfect for Indian weather with breathable fabric.",
+    description:
+      "Elevate your streetwear game with our signature oversized hoodie. Crafted from premium cotton blend with a soft fleece interior, this hoodie offers unmatched comfort and style. Perfect for Indian weather with breathable fabric.",
     features: [
       "Premium 80% Cotton, 20% Polyester blend",
       "Soft fleece interior lining",
@@ -45,27 +63,27 @@ export default function ProductDetails() {
       "Adjustable drawstring hood",
       "Ribbed cuffs and hem",
       "Pre-shrunk fabric",
-      "Machine washable"
+      "Machine washable",
     ],
     images: [
       "https://images.unsplash.com/photo-1556821840-3a63f95609a7?w=600&h=600&fit=crop",
       "https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=600&h=600&fit=crop",
       "https://images.unsplash.com/photo-1473966968600-fa801b869a1a?w=600&h=600&fit=crop",
-      "https://images.unsplash.com/photo-1544966503-7cc5ac882d5c?w=600&h=600&fit=crop"
+      "https://images.unsplash.com/photo-1544966503-7cc5ac882d5c?w=600&h=600&fit=crop",
     ],
     sizes: [
       { size: "S", chest: "36-38", available: true },
       { size: "M", chest: "38-40", available: true },
       { size: "L", chest: "40-42", available: true },
       { size: "XL", chest: "42-44", available: true },
-      { size: "XXL", chest: "44-46", available: false }
+      { size: "XXL", chest: "44-46", available: false },
     ],
     colors: [
       { name: "Black", hex: "#000000", available: true },
       { name: "White", hex: "#FFFFFF", available: true },
       { name: "Gray", hex: "#808080", available: true },
-      { name: "Navy", hex: "#000080", available: false }
-    ]
+      { name: "Navy", hex: "#000080", available: false },
+    ],
   };
 
   const reviews = [
@@ -74,31 +92,34 @@ export default function ProductDetails() {
       user: "Arjun K.",
       rating: 5,
       date: "2 days ago",
-      comment: "Amazing quality! The fit is perfect and the material feels premium. Worth every rupee.",
+      comment:
+        "Amazing quality! The fit is perfect and the material feels premium. Worth every rupee.",
       verified: true,
       size: "L",
-      color: "Black"
+      color: "Black",
     },
     {
       id: 2,
       user: "Priya S.",
       rating: 4,
       date: "1 week ago",
-      comment: "Love the oversized fit. Very comfortable for casual wear. Only wish more colors were available.",
+      comment:
+        "Love the oversized fit. Very comfortable for casual wear. Only wish more colors were available.",
       verified: true,
       size: "M",
-      color: "White"
+      color: "White",
     },
     {
       id: 3,
       user: "Rohit M.",
       rating: 5,
       date: "2 weeks ago",
-      comment: "Best hoodie I've bought online. Fast delivery to Mumbai. Definitely ordering more from DRIPZOID!",
+      comment:
+        "Best hoodie I've bought online. Fast delivery to Mumbai. Definitely ordering more from DRIPZOID!",
       verified: true,
       size: "XL",
-      color: "Gray"
-    }
+      color: "Gray",
+    },
   ];
 
   const similarProducts = [
@@ -107,25 +128,28 @@ export default function ProductDetails() {
       name: "Streetwear Cargo Pants",
       price: 1799,
       originalPrice: 2299,
-      image: "https://images.unsplash.com/photo-1473966968600-fa801b869a1a?w=300&h=300&fit=crop",
-      rating: 4.3
+      image:
+        "https://images.unsplash.com/photo-1473966968600-fa801b869a1a?w=300&h=300&fit=crop",
+      rating: 4.3,
     },
     {
       id: 3,
       name: "Urban Graphic Tee",
       price: 799,
       originalPrice: 1299,
-      image: "https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=300&h=300&fit=crop",
-      rating: 4.6
+      image:
+        "https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=300&h=300&fit=crop",
+      rating: 4.6,
     },
     {
       id: 4,
       name: "Denim Bomber Jacket",
       price: 2499,
       originalPrice: 3499,
-      image: "https://images.unsplash.com/photo-1544966503-7cc5ac882d5c?w=300&h=300&fit=crop",
-      rating: 4.8
-    }
+      image:
+        "https://images.unsplash.com/photo-1544966503-7cc5ac882d5c?w=300&h=300&fit=crop",
+      rating: 4.8,
+    },
   ];
 
   const checkPincode = () => {
@@ -138,7 +162,7 @@ export default function ProductDetails() {
   };
 
   return (
-    <div className={`min-h-screen bg-background ${isDarkMode ? 'dark' : ''}`}>
+    <div className={`min-h-screen bg-background ${isDarkMode ? "dark" : ""}`}>
       {/* Navigation Header */}
       <header className="border-b border-border bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 sticky top-0 z-50">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
@@ -146,9 +170,10 @@ export default function ProductDetails() {
             {/* Logo */}
             <Link to="/" className="flex items-center space-x-2">
               <img
-                src={isDarkMode
-                  ? "https://cdn.builder.io/api/v1/image/assets%2Fcb420c754f164cb09479ca8042848804%2Fcedb9b0fffa847569c81aa40025b5357?format=webp&width=800"
-                  : "https://cdn.builder.io/api/v1/image/assets%2Fcb420c754f164cb09479ca8042848804%2Fb536f9a54dea43a38ce36553002f4bc2?format=webp&width=800"
+                src={
+                  isDarkMode
+                    ? "https://cdn.builder.io/api/v1/image/assets%2Fcb420c754f164cb09479ca8042848804%2Fcedb9b0fffa847569c81aa40025b5357?format=webp&width=800"
+                    : "https://cdn.builder.io/api/v1/image/assets%2Fcb420c754f164cb09479ca8042848804%2Fb536f9a54dea43a38ce36553002f4bc2?format=webp&width=800"
                 }
                 alt="DRIPZOID"
                 className="h-12 w-auto"
@@ -162,13 +187,15 @@ export default function ProductDetails() {
                   key={category.name}
                   to={category.path}
                   className={`text-sm font-medium transition-colors ${
-                    category.available 
-                      ? "text-foreground hover:text-neon-blue" 
+                    category.available
+                      ? "text-foreground hover:text-neon-blue"
                       : "text-muted-foreground cursor-not-allowed"
                   }`}
                 >
                   {category.name}
-                  {!category.available && <span className="ml-1 text-xs">(Soon)</span>}
+                  {!category.available && (
+                    <span className="ml-1 text-xs">(Soon)</span>
+                  )}
                 </Link>
               ))}
             </nav>
@@ -176,7 +203,11 @@ export default function ProductDetails() {
             {/* Right side actions */}
             <div className="flex items-center space-x-4">
               <Button variant="ghost" size="icon" onClick={toggleDarkMode}>
-                {isDarkMode ? <Sun className="h-5 w-5" /> : <Moon className="h-5 w-5" />}
+                {isDarkMode ? (
+                  <Sun className="h-5 w-5" />
+                ) : (
+                  <Moon className="h-5 w-5" />
+                )}
               </Button>
               <Button variant="ghost" size="icon">
                 <Search className="h-5 w-5" />
@@ -209,14 +240,16 @@ export default function ProductDetails() {
                   key={category.name}
                   to={category.path}
                   className={`block py-2 text-sm font-medium transition-colors ${
-                    category.available 
-                      ? "text-foreground hover:text-neon-blue" 
+                    category.available
+                      ? "text-foreground hover:text-neon-blue"
                       : "text-muted-foreground cursor-not-allowed"
                   }`}
                   onClick={() => setIsMenuOpen(false)}
                 >
                   {category.name}
-                  {!category.available && <span className="ml-1 text-xs">(Soon)</span>}
+                  {!category.available && (
+                    <span className="ml-1 text-xs">(Soon)</span>
+                  )}
                 </Link>
               ))}
             </nav>
@@ -227,9 +260,13 @@ export default function ProductDetails() {
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {/* Breadcrumb */}
         <div className="flex items-center gap-2 text-sm text-muted-foreground mb-6">
-          <Link to="/" className="hover:text-foreground">Home</Link>
+          <Link to="/" className="hover:text-foreground">
+            Home
+          </Link>
           <span>/</span>
-          <Link to="/men" className="hover:text-foreground">Men</Link>
+          <Link to="/men" className="hover:text-foreground">
+            Men
+          </Link>
           <span>/</span>
           <span className="text-foreground">{product.name}</span>
         </div>
@@ -239,8 +276,8 @@ export default function ProductDetails() {
           <div className="space-y-4">
             {/* Main Image */}
             <div className="relative aspect-square overflow-hidden rounded-lg bg-muted">
-              <img 
-                src={product.images[selectedImage]} 
+              <img
+                src={product.images[selectedImage]}
                 alt={product.name}
                 className="w-full h-full object-cover"
               />
@@ -249,15 +286,17 @@ export default function ProductDetails() {
                   {product.discount}% OFF
                 </div>
               )}
-              <Button 
-                variant="ghost" 
-                size="icon" 
+              <Button
+                variant="ghost"
+                size="icon"
                 className="absolute top-4 right-4 bg-white/80 hover:bg-white"
                 onClick={() => setIsWishlisted(!isWishlisted)}
               >
-                <Heart className={`h-5 w-5 ${isWishlisted ? 'fill-red-500 text-red-500' : ''}`} />
+                <Heart
+                  className={`h-5 w-5 ${isWishlisted ? "fill-red-500 text-red-500" : ""}`}
+                />
               </Button>
-              
+
               {/* Image Navigation */}
               {product.images.length > 1 && (
                 <>
@@ -265,7 +304,13 @@ export default function ProductDetails() {
                     variant="ghost"
                     size="icon"
                     className="absolute left-2 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-white"
-                    onClick={() => setSelectedImage(selectedImage > 0 ? selectedImage - 1 : product.images.length - 1)}
+                    onClick={() =>
+                      setSelectedImage(
+                        selectedImage > 0
+                          ? selectedImage - 1
+                          : product.images.length - 1,
+                      )
+                    }
                   >
                     <ChevronLeft className="h-4 w-4" />
                   </Button>
@@ -273,7 +318,13 @@ export default function ProductDetails() {
                     variant="ghost"
                     size="icon"
                     className="absolute right-2 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-white"
-                    onClick={() => setSelectedImage(selectedImage < product.images.length - 1 ? selectedImage + 1 : 0)}
+                    onClick={() =>
+                      setSelectedImage(
+                        selectedImage < product.images.length - 1
+                          ? selectedImage + 1
+                          : 0,
+                      )
+                    }
                   >
                     <ChevronRight className="h-4 w-4" />
                   </Button>
@@ -288,10 +339,16 @@ export default function ProductDetails() {
                   key={index}
                   onClick={() => setSelectedImage(index)}
                   className={`flex-shrink-0 w-20 h-20 rounded-lg overflow-hidden border-2 transition-colors ${
-                    selectedImage === index ? 'border-neon-blue' : 'border-border'
+                    selectedImage === index
+                      ? "border-neon-blue"
+                      : "border-border"
                   }`}
                 >
-                  <img src={image} alt={`View ${index + 1}`} className="w-full h-full object-cover" />
+                  <img
+                    src={image}
+                    alt={`View ${index + 1}`}
+                    className="w-full h-full object-cover"
+                  />
                 </button>
               ))}
             </div>
@@ -300,20 +357,22 @@ export default function ProductDetails() {
           {/* Product Info */}
           <div className="space-y-6">
             <div>
-              <p className="text-sm text-muted-foreground mb-1">{product.brand}</p>
+              <p className="text-sm text-muted-foreground mb-1">
+                {product.brand}
+              </p>
               <h1 className="text-3xl font-bold mb-2">{product.name}</h1>
-              
+
               {/* Rating */}
               <div className="flex items-center gap-2 mb-4">
                 <div className="flex items-center gap-1">
                   {[...Array(5)].map((_, i) => (
-                    <Star 
-                      key={i} 
+                    <Star
+                      key={i}
                       className={`h-4 w-4 ${
-                        i < Math.floor(product.rating) 
-                          ? 'fill-neon-blue text-neon-blue' 
-                          : 'text-muted-foreground'
-                      }`} 
+                        i < Math.floor(product.rating)
+                          ? "fill-neon-blue text-neon-blue"
+                          : "text-muted-foreground"
+                      }`}
                     />
                   ))}
                 </div>
@@ -326,7 +385,9 @@ export default function ProductDetails() {
               <div className="flex items-center gap-3 mb-6">
                 <span className="text-3xl font-bold">₹{product.price}</span>
                 {product.originalPrice && (
-                  <span className="text-xl text-muted-foreground line-through">₹{product.originalPrice}</span>
+                  <span className="text-xl text-muted-foreground line-through">
+                    ₹{product.originalPrice}
+                  </span>
                 )}
                 {product.discount && (
                   <Badge className="bg-neon-blue text-neon-foreground">
@@ -343,11 +404,17 @@ export default function ProductDetails() {
                 {product.sizes.map((sizeOption) => (
                   <Button
                     key={sizeOption.size}
-                    variant={selectedSize === sizeOption.size ? "default" : "outline"}
-                    className={`${selectedSize === sizeOption.size ? 'bg-neon-blue hover:bg-neon-blue/90' : ''} ${
-                      !sizeOption.available ? 'opacity-50 cursor-not-allowed' : ''
+                    variant={
+                      selectedSize === sizeOption.size ? "default" : "outline"
+                    }
+                    className={`${selectedSize === sizeOption.size ? "bg-neon-blue hover:bg-neon-blue/90" : ""} ${
+                      !sizeOption.available
+                        ? "opacity-50 cursor-not-allowed"
+                        : ""
                     }`}
-                    onClick={() => sizeOption.available && setSelectedSize(sizeOption.size)}
+                    onClick={() =>
+                      sizeOption.available && setSelectedSize(sizeOption.size)
+                    }
                     disabled={!sizeOption.available}
                   >
                     {sizeOption.size}
@@ -366,13 +433,16 @@ export default function ProductDetails() {
                 {product.colors.map((colorOption) => (
                   <button
                     key={colorOption.name}
-                    onClick={() => colorOption.available && setSelectedColor(colorOption.name)}
+                    onClick={() =>
+                      colorOption.available &&
+                      setSelectedColor(colorOption.name)
+                    }
                     disabled={!colorOption.available}
                     className={`w-10 h-10 rounded-full border-2 transition-all ${
-                      selectedColor === colorOption.name 
-                        ? 'border-neon-blue scale-110' 
-                        : 'border-border'
-                    } ${!colorOption.available ? 'opacity-50 cursor-not-allowed' : 'hover:scale-105'}`}
+                      selectedColor === colorOption.name
+                        ? "border-neon-blue scale-110"
+                        : "border-border"
+                    } ${!colorOption.available ? "opacity-50 cursor-not-allowed" : "hover:scale-105"}`}
                     style={{ backgroundColor: colorOption.hex }}
                     title={colorOption.name}
                   >
@@ -398,7 +468,9 @@ export default function ProductDetails() {
                 >
                   <Minus className="h-4 w-4" />
                 </Button>
-                <span className="text-lg font-semibold w-8 text-center">{quantity}</span>
+                <span className="text-lg font-semibold w-8 text-center">
+                  {quantity}
+                </span>
                 <Button
                   variant="outline"
                   size="icon"
@@ -411,14 +483,14 @@ export default function ProductDetails() {
 
             {/* Action Buttons */}
             <div className="space-y-3">
-              <Button 
+              <Button
                 className="w-full bg-neon-blue hover:bg-neon-blue/90 text-neon-foreground text-lg py-6"
                 disabled={!selectedSize || !selectedColor}
               >
                 Add to Cart - ₹{product.price * quantity}
               </Button>
-              <Button 
-                variant="outline" 
+              <Button
+                variant="outline"
                 className="w-full text-lg py-6"
                 disabled={!selectedSize || !selectedColor}
               >
@@ -468,13 +540,17 @@ export default function ProductDetails() {
           <TabsList className="grid w-full grid-cols-3">
             <TabsTrigger value="description">Description</TabsTrigger>
             <TabsTrigger value="features">Features</TabsTrigger>
-            <TabsTrigger value="reviews">Reviews ({product.reviews})</TabsTrigger>
+            <TabsTrigger value="reviews">
+              Reviews ({product.reviews})
+            </TabsTrigger>
           </TabsList>
-          
+
           <TabsContent value="description" className="space-y-4">
-            <p className="text-muted-foreground leading-relaxed">{product.description}</p>
+            <p className="text-muted-foreground leading-relaxed">
+              {product.description}
+            </p>
           </TabsContent>
-          
+
           <TabsContent value="features" className="space-y-4">
             <ul className="space-y-2">
               {product.features.map((feature, index) => (
@@ -485,7 +561,7 @@ export default function ProductDetails() {
               ))}
             </ul>
           </TabsContent>
-          
+
           <TabsContent value="reviews" className="space-y-6">
             {reviews.map((review) => (
               <div key={review.id} className="border-b border-border pb-6">
@@ -494,23 +570,27 @@ export default function ProductDetails() {
                     <div className="flex items-center gap-2 mb-1">
                       <span className="font-semibold">{review.user}</span>
                       {review.verified && (
-                        <Badge variant="outline" className="text-xs">Verified Purchase</Badge>
+                        <Badge variant="outline" className="text-xs">
+                          Verified Purchase
+                        </Badge>
                       )}
                     </div>
                     <div className="flex items-center gap-1 mb-2">
                       {[...Array(5)].map((_, i) => (
-                        <Star 
-                          key={i} 
+                        <Star
+                          key={i}
                           className={`h-4 w-4 ${
-                            i < review.rating 
-                              ? 'fill-neon-blue text-neon-blue' 
-                              : 'text-muted-foreground'
-                          }`} 
+                            i < review.rating
+                              ? "fill-neon-blue text-neon-blue"
+                              : "text-muted-foreground"
+                          }`}
                         />
                       ))}
                     </div>
                   </div>
-                  <span className="text-sm text-muted-foreground">{review.date}</span>
+                  <span className="text-sm text-muted-foreground">
+                    {review.date}
+                  </span>
                 </div>
                 <p className="text-muted-foreground mb-2">{review.comment}</p>
                 <div className="flex gap-4 text-sm text-muted-foreground">
@@ -527,10 +607,14 @@ export default function ProductDetails() {
           <h2 className="text-2xl font-bold mb-6">You Might Also Like</h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {similarProducts.map((product) => (
-              <Link key={product.id} to={`/product/${product.id}`} className="group">
+              <Link
+                key={product.id}
+                to={`/product/${product.id}`}
+                className="group"
+              >
                 <div className="relative overflow-hidden rounded-lg mb-4 aspect-square">
-                  <img 
-                    src={product.image} 
+                  <img
+                    src={product.image}
                     alt={product.name}
                     className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
                   />
@@ -539,21 +623,25 @@ export default function ProductDetails() {
                   <h3 className="font-semibold text-lg mb-1">{product.name}</h3>
                   <div className="flex items-center gap-1 mb-2">
                     {[...Array(5)].map((_, i) => (
-                      <Star 
-                        key={i} 
+                      <Star
+                        key={i}
                         className={`h-4 w-4 ${
-                          i < Math.floor(product.rating) 
-                            ? 'fill-neon-blue text-neon-blue' 
-                            : 'text-muted-foreground'
-                        }`} 
+                          i < Math.floor(product.rating)
+                            ? "fill-neon-blue text-neon-blue"
+                            : "text-muted-foreground"
+                        }`}
                       />
                     ))}
-                    <span className="text-sm text-muted-foreground ml-1">({product.rating})</span>
+                    <span className="text-sm text-muted-foreground ml-1">
+                      ({product.rating})
+                    </span>
                   </div>
                   <div className="flex items-center gap-2">
                     <span className="text-lg font-bold">₹{product.price}</span>
                     {product.originalPrice && (
-                      <span className="text-sm text-muted-foreground line-through">₹{product.originalPrice}</span>
+                      <span className="text-sm text-muted-foreground line-through">
+                        ₹{product.originalPrice}
+                      </span>
                     )}
                   </div>
                 </div>

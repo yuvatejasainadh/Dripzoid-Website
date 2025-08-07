@@ -1,6 +1,15 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { Moon, Sun, Smartphone, Mail, ArrowRight, ArrowLeft, CheckCircle, User } from "lucide-react";
+import {
+  Moon,
+  Sun,
+  Smartphone,
+  Mail,
+  ArrowRight,
+  ArrowLeft,
+  CheckCircle,
+  User,
+} from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { useAuth } from "../context/AuthContext";
@@ -13,7 +22,7 @@ export default function Signup() {
     phoneNumber: "",
     email: "",
     password: "",
-    confirmPassword: ""
+    confirmPassword: "",
   });
   const [otp, setOtp] = useState("");
   const [step, setStep] = useState("input"); // input, otp, success
@@ -23,17 +32,17 @@ export default function Signup() {
   // Redirect if already logged in
   useEffect(() => {
     if (isLoggedIn) {
-      window.location.href = '/';
+      window.location.href = "/";
     }
   }, [isLoggedIn]);
 
   const toggleDarkMode = () => {
     setIsDarkMode(!isDarkMode);
-    document.documentElement.classList.toggle('dark');
+    document.documentElement.classList.toggle("dark");
   };
 
   const handleInputChange = (field: string, value: string) => {
-    setFormData(prev => ({ ...prev, [field]: value }));
+    setFormData((prev) => ({ ...prev, [field]: value }));
   };
 
   const validateForm = () => {
@@ -96,12 +105,16 @@ export default function Signup() {
         id: "user_" + Date.now(),
         firstName: formData.firstName,
         lastName: formData.lastName,
-        email: signupMethod === "phone" ?
-          (formData.email || `${formData.phoneNumber}@example.com`) :
-          formData.email,
-        phone: signupMethod === "phone" ?
-          `+91 ${formData.phoneNumber}` :
-          (formData.phoneNumber ? `+91 ${formData.phoneNumber}` : "+91 9876543210")
+        email:
+          signupMethod === "phone"
+            ? formData.email || `${formData.phoneNumber}@example.com`
+            : formData.email,
+        phone:
+          signupMethod === "phone"
+            ? `+91 ${formData.phoneNumber}`
+            : formData.phoneNumber
+              ? `+91 ${formData.phoneNumber}`
+              : "+91 9876543210",
       };
 
       login(userData);
@@ -115,7 +128,7 @@ export default function Signup() {
   };
 
   return (
-    <div className={`min-h-screen bg-background ${isDarkMode ? 'dark' : ''}`}>
+    <div className={`min-h-screen bg-background ${isDarkMode ? "dark" : ""}`}>
       {/* Navigation Header */}
       <header className="border-b border-border bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
@@ -123,9 +136,10 @@ export default function Signup() {
             {/* Logo */}
             <Link to="/" className="flex items-center space-x-2">
               <img
-                src={isDarkMode
-                  ? "https://cdn.builder.io/api/v1/image/assets%2Fcb420c754f164cb09479ca8042848804%2Fcedb9b0fffa847569c81aa40025b5357?format=webp&width=800"
-                  : "https://cdn.builder.io/api/v1/image/assets%2Fcb420c754f164cb09479ca8042848804%2Fb536f9a54dea43a38ce36553002f4bc2?format=webp&width=800"
+                src={
+                  isDarkMode
+                    ? "https://cdn.builder.io/api/v1/image/assets%2Fcb420c754f164cb09479ca8042848804%2Fcedb9b0fffa847569c81aa40025b5357?format=webp&width=800"
+                    : "https://cdn.builder.io/api/v1/image/assets%2Fcb420c754f164cb09479ca8042848804%2Fb536f9a54dea43a38ce36553002f4bc2?format=webp&width=800"
                 }
                 alt="DRIPZOID"
                 className="h-12 w-auto"
@@ -135,7 +149,11 @@ export default function Signup() {
             {/* Right side actions */}
             <div className="flex items-center space-x-4">
               <Button variant="ghost" size="icon" onClick={toggleDarkMode}>
-                {isDarkMode ? <Sun className="h-5 w-5" /> : <Moon className="h-5 w-5" />}
+                {isDarkMode ? (
+                  <Sun className="h-5 w-5" />
+                ) : (
+                  <Moon className="h-5 w-5" />
+                )}
               </Button>
             </div>
           </div>
@@ -161,22 +179,31 @@ export default function Signup() {
                   {step === "input" ? "Create Account" : "Verify Your Account"}
                 </h1>
                 <p className="text-muted-foreground">
-                  {step === "input" 
-                    ? "Join DRIPZOID for the latest streetwear drops" 
-                    : `We've sent a 6-digit code to ${signupMethod === "phone" ? `+91 ${formData.phoneNumber}` : formData.email}`
-                  }
+                  {step === "input"
+                    ? "Join DRIPZOID for the latest streetwear drops"
+                    : `We've sent a 6-digit code to ${signupMethod === "phone" ? `+91 ${formData.phoneNumber}` : formData.email}`}
                 </p>
               </div>
 
               {step === "input" ? (
                 /* Input Step */
-                <Tabs value={signupMethod} onValueChange={setSignupMethod} className="space-y-6">
+                <Tabs
+                  value={signupMethod}
+                  onValueChange={setSignupMethod}
+                  className="space-y-6"
+                >
                   <TabsList className="grid w-full grid-cols-2">
-                    <TabsTrigger value="phone" className="flex items-center gap-2">
+                    <TabsTrigger
+                      value="phone"
+                      className="flex items-center gap-2"
+                    >
                       <Smartphone className="h-4 w-4" />
                       Phone
                     </TabsTrigger>
-                    <TabsTrigger value="email" className="flex items-center gap-2">
+                    <TabsTrigger
+                      value="email"
+                      className="flex items-center gap-2"
+                    >
                       <Mail className="h-4 w-4" />
                       Email
                     </TabsTrigger>
@@ -185,21 +212,29 @@ export default function Signup() {
                   <TabsContent value="phone" className="space-y-4">
                     <div className="grid grid-cols-2 gap-4">
                       <div>
-                        <label className="block text-sm font-medium mb-2">First Name *</label>
+                        <label className="block text-sm font-medium mb-2">
+                          First Name *
+                        </label>
                         <input
                           type="text"
                           value={formData.firstName}
-                          onChange={(e) => handleInputChange('firstName', e.target.value)}
+                          onChange={(e) =>
+                            handleInputChange("firstName", e.target.value)
+                          }
                           className="w-full px-3 py-2 border border-border rounded-lg"
                           placeholder="First name"
                         />
                       </div>
                       <div>
-                        <label className="block text-sm font-medium mb-2">Last Name</label>
+                        <label className="block text-sm font-medium mb-2">
+                          Last Name
+                        </label>
                         <input
                           type="text"
                           value={formData.lastName}
-                          onChange={(e) => handleInputChange('lastName', e.target.value)}
+                          onChange={(e) =>
+                            handleInputChange("lastName", e.target.value)
+                          }
                           className="w-full px-3 py-2 border border-border rounded-lg"
                           placeholder="Last name"
                         />
@@ -207,7 +242,9 @@ export default function Signup() {
                     </div>
 
                     <div>
-                      <label className="block text-sm font-medium mb-2">Phone Number *</label>
+                      <label className="block text-sm font-medium mb-2">
+                        Phone Number *
+                      </label>
                       <div className="flex">
                         <span className="inline-flex items-center px-3 py-2 border border-r-0 border-border rounded-l-lg bg-muted text-muted-foreground">
                           +91
@@ -215,7 +252,12 @@ export default function Signup() {
                         <input
                           type="tel"
                           value={formData.phoneNumber}
-                          onChange={(e) => handleInputChange('phoneNumber', e.target.value.replace(/\D/g, '').slice(0, 10))}
+                          onChange={(e) =>
+                            handleInputChange(
+                              "phoneNumber",
+                              e.target.value.replace(/\D/g, "").slice(0, 10),
+                            )
+                          }
                           className="flex-1 px-3 py-2 border border-border rounded-r-lg"
                           placeholder="9876543210"
                         />
@@ -223,11 +265,15 @@ export default function Signup() {
                     </div>
 
                     <div>
-                      <label className="block text-sm font-medium mb-2">Email (Optional)</label>
+                      <label className="block text-sm font-medium mb-2">
+                        Email (Optional)
+                      </label>
                       <input
                         type="email"
                         value={formData.email}
-                        onChange={(e) => handleInputChange('email', e.target.value)}
+                        onChange={(e) =>
+                          handleInputChange("email", e.target.value)
+                        }
                         className="w-full px-3 py-2 border border-border rounded-lg"
                         placeholder="your@email.com"
                       />
@@ -236,7 +282,11 @@ export default function Signup() {
                     <Button
                       onClick={sendOTP}
                       className="w-full bg-neon-blue hover:bg-neon-blue/90 text-neon-foreground"
-                      disabled={!formData.firstName.trim() || !formData.lastName.trim() || formData.phoneNumber.length !== 10}
+                      disabled={
+                        !formData.firstName.trim() ||
+                        !formData.lastName.trim() ||
+                        formData.phoneNumber.length !== 10
+                      }
                     >
                       Send OTP
                       <ArrowRight className="h-4 w-4 ml-2" />
@@ -245,9 +295,19 @@ export default function Signup() {
                     <div className="text-center">
                       <p className="text-sm text-muted-foreground">
                         By creating an account, you agree to our{" "}
-                        <Link to="/terms" className="text-neon-blue hover:underline">Terms of Service</Link>{" "}
+                        <Link
+                          to="/terms"
+                          className="text-neon-blue hover:underline"
+                        >
+                          Terms of Service
+                        </Link>{" "}
                         and{" "}
-                        <Link to="/privacy" className="text-neon-blue hover:underline">Privacy Policy</Link>
+                        <Link
+                          to="/privacy"
+                          className="text-neon-blue hover:underline"
+                        >
+                          Privacy Policy
+                        </Link>
                       </p>
                     </div>
                   </TabsContent>
@@ -255,21 +315,29 @@ export default function Signup() {
                   <TabsContent value="email" className="space-y-4">
                     <div className="grid grid-cols-2 gap-4">
                       <div>
-                        <label className="block text-sm font-medium mb-2">First Name *</label>
+                        <label className="block text-sm font-medium mb-2">
+                          First Name *
+                        </label>
                         <input
                           type="text"
                           value={formData.firstName}
-                          onChange={(e) => handleInputChange('firstName', e.target.value)}
+                          onChange={(e) =>
+                            handleInputChange("firstName", e.target.value)
+                          }
                           className="w-full px-3 py-2 border border-border rounded-lg"
                           placeholder="First name"
                         />
                       </div>
                       <div>
-                        <label className="block text-sm font-medium mb-2">Last Name</label>
+                        <label className="block text-sm font-medium mb-2">
+                          Last Name
+                        </label>
                         <input
                           type="text"
                           value={formData.lastName}
-                          onChange={(e) => handleInputChange('lastName', e.target.value)}
+                          onChange={(e) =>
+                            handleInputChange("lastName", e.target.value)
+                          }
                           className="w-full px-3 py-2 border border-border rounded-lg"
                           placeholder="Last name"
                         />
@@ -277,18 +345,24 @@ export default function Signup() {
                     </div>
 
                     <div>
-                      <label className="block text-sm font-medium mb-2">Email Address *</label>
+                      <label className="block text-sm font-medium mb-2">
+                        Email Address *
+                      </label>
                       <input
                         type="email"
                         value={formData.email}
-                        onChange={(e) => handleInputChange('email', e.target.value)}
+                        onChange={(e) =>
+                          handleInputChange("email", e.target.value)
+                        }
                         className="w-full px-3 py-2 border border-border rounded-lg"
                         placeholder="your@email.com"
                       />
                     </div>
 
                     <div>
-                      <label className="block text-sm font-medium mb-2">Phone Number (Optional)</label>
+                      <label className="block text-sm font-medium mb-2">
+                        Phone Number (Optional)
+                      </label>
                       <div className="flex">
                         <span className="inline-flex items-center px-3 py-2 border border-r-0 border-border rounded-l-lg bg-muted text-muted-foreground">
                           +91
@@ -296,7 +370,12 @@ export default function Signup() {
                         <input
                           type="tel"
                           value={formData.phoneNumber}
-                          onChange={(e) => handleInputChange('phoneNumber', e.target.value.replace(/\D/g, '').slice(0, 10))}
+                          onChange={(e) =>
+                            handleInputChange(
+                              "phoneNumber",
+                              e.target.value.replace(/\D/g, "").slice(0, 10),
+                            )
+                          }
                           className="flex-1 px-3 py-2 border border-border rounded-r-lg"
                           placeholder="9876543210"
                         />
@@ -304,31 +383,44 @@ export default function Signup() {
                     </div>
 
                     <div>
-                      <label className="block text-sm font-medium mb-2">Password *</label>
+                      <label className="block text-sm font-medium mb-2">
+                        Password *
+                      </label>
                       <input
                         type="password"
                         value={formData.password}
-                        onChange={(e) => handleInputChange('password', e.target.value)}
+                        onChange={(e) =>
+                          handleInputChange("password", e.target.value)
+                        }
                         className="w-full px-3 py-2 border border-border rounded-lg"
                         placeholder="Create a password (min 6 characters)"
                       />
                     </div>
 
                     <div>
-                      <label className="block text-sm font-medium mb-2">Confirm Password *</label>
+                      <label className="block text-sm font-medium mb-2">
+                        Confirm Password *
+                      </label>
                       <input
                         type="password"
                         value={formData.confirmPassword}
-                        onChange={(e) => handleInputChange('confirmPassword', e.target.value)}
+                        onChange={(e) =>
+                          handleInputChange("confirmPassword", e.target.value)
+                        }
                         className="w-full px-3 py-2 border border-border rounded-lg"
                         placeholder="Confirm your password"
                       />
                     </div>
 
-                    <Button 
+                    <Button
                       onClick={sendOTP}
                       className="w-full bg-neon-blue hover:bg-neon-blue/90 text-neon-foreground"
-                      disabled={!formData.firstName.trim() || !formData.email.includes("@") || formData.password.length < 6 || formData.password !== formData.confirmPassword}
+                      disabled={
+                        !formData.firstName.trim() ||
+                        !formData.email.includes("@") ||
+                        formData.password.length < 6 ||
+                        formData.password !== formData.confirmPassword
+                      }
                     >
                       Create Account
                       <ArrowRight className="h-4 w-4 ml-2" />
@@ -337,9 +429,19 @@ export default function Signup() {
                     <div className="text-center">
                       <p className="text-sm text-muted-foreground">
                         By creating an account, you agree to our{" "}
-                        <Link to="/terms" className="text-neon-blue hover:underline">Terms of Service</Link>{" "}
+                        <Link
+                          to="/terms"
+                          className="text-neon-blue hover:underline"
+                        >
+                          Terms of Service
+                        </Link>{" "}
                         and{" "}
-                        <Link to="/privacy" className="text-neon-blue hover:underline">Privacy Policy</Link>
+                        <Link
+                          to="/privacy"
+                          className="text-neon-blue hover:underline"
+                        >
+                          Privacy Policy
+                        </Link>
                       </p>
                     </div>
                   </TabsContent>
@@ -348,11 +450,15 @@ export default function Signup() {
                 /* OTP Verification Step */
                 <div className="space-y-6">
                   <div>
-                    <label className="block text-sm font-medium mb-2">Enter 6-digit OTP</label>
+                    <label className="block text-sm font-medium mb-2">
+                      Enter 6-digit OTP
+                    </label>
                     <input
                       type="text"
                       value={otp}
-                      onChange={(e) => setOtp(e.target.value.replace(/\D/g, '').slice(0, 6))}
+                      onChange={(e) =>
+                        setOtp(e.target.value.replace(/\D/g, "").slice(0, 6))
+                      }
                       className="w-full px-3 py-2 border border-border rounded-lg text-center text-lg tracking-widest"
                       placeholder="123456"
                       maxLength={6}
@@ -362,7 +468,7 @@ export default function Signup() {
                     </p>
                   </div>
 
-                  <Button 
+                  <Button
                     onClick={verifyOTP}
                     className="w-full bg-neon-blue hover:bg-neon-blue/90 text-neon-foreground"
                     disabled={otp.length !== 6}
@@ -379,7 +485,7 @@ export default function Signup() {
                       <ArrowLeft className="h-3 w-3" />
                       Back
                     </button>
-                    
+
                     <button className="text-neon-blue hover:underline">
                       Resend OTP
                     </button>
@@ -394,7 +500,10 @@ export default function Signup() {
             <div className="mt-8 text-center">
               <p className="text-muted-foreground">
                 Already have an account?{" "}
-                <Link to="/login" className="text-neon-blue hover:underline font-medium">
+                <Link
+                  to="/login"
+                  className="text-neon-blue hover:underline font-medium"
+                >
                   Sign in
                 </Link>
               </p>

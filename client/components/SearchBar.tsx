@@ -8,7 +8,10 @@ interface SearchBarProps {
   className?: string;
 }
 
-export default function SearchBar({ placeholder = "Search for products...", className = "" }: SearchBarProps) {
+export default function SearchBar({
+  placeholder = "Search for products...",
+  className = "",
+}: SearchBarProps) {
   const [query, setQuery] = useState("");
   const navigate = useNavigate();
 

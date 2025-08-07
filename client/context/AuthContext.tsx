@@ -26,20 +26,22 @@ export const useAuth = () => {
   return context;
 };
 
-export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
+  children,
+}) => {
   const [user, setUser] = useState<User | null>(null);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   // Check for saved user session on mount
   useEffect(() => {
-    const savedUser = localStorage.getItem('dripzoid_user');
+    const savedUser = localStorage.getItem("dripzoid_user");
     if (savedUser) {
       try {
         const userData = JSON.parse(savedUser);
         setUser(userData);
         setIsLoggedIn(true);
       } catch (error) {
-        localStorage.removeItem('dripzoid_user');
+        localStorage.removeItem("dripzoid_user");
       }
     }
   }, []);
@@ -47,21 +49,21 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
   const login = (userData: User) => {
     setUser(userData);
     setIsLoggedIn(true);
-    localStorage.setItem('dripzoid_user', JSON.stringify(userData));
+    localStorage.setItem("dripzoid_user", JSON.stringify(userData));
   };
 
   const logout = () => {
     setUser(null);
     setIsLoggedIn(false);
-    localStorage.removeItem('dripzoid_user');
+    localStorage.removeItem("dripzoid_user");
     // Redirect to home page after logout
-    window.location.href = '/';
+    window.location.href = "/";
   };
 
   const requireAuth = () => {
     if (!isLoggedIn) {
       // Redirect to login page
-      window.location.href = '/login';
+      window.location.href = "/login";
       return false;
     }
     return true;

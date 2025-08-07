@@ -1,6 +1,18 @@
 import { useState, useEffect } from "react";
 import { Link, useSearchParams, useNavigate } from "react-router-dom";
-import { ShoppingBag, Heart, Search, User, Menu, Moon, Sun, Star, Filter, SlidersHorizontal, X } from "lucide-react";
+import {
+  ShoppingBag,
+  Heart,
+  Search,
+  User,
+  Menu,
+  Moon,
+  Sun,
+  Star,
+  Filter,
+  SlidersHorizontal,
+  X,
+} from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { useCart } from "../context/CartContext";
@@ -11,21 +23,27 @@ export default function SearchResults() {
   const [isDarkMode, setIsDarkMode] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isFilterOpen, setIsFilterOpen] = useState(false);
-  const [searchQuery, setSearchQuery] = useState(searchParams.get('q') || '');
+  const [searchQuery, setSearchQuery] = useState(searchParams.get("q") || "");
   const [sortBy, setSortBy] = useState("relevance");
-  const { addToCart, addToWishlist, isInWishlist, getCartCount, wishlistItems } = useCart();
+  const {
+    addToCart,
+    addToWishlist,
+    isInWishlist,
+    getCartCount,
+    wishlistItems,
+  } = useCart();
   const { isLoggedIn, requireAuth } = useAuth();
   const navigate = useNavigate();
 
   const toggleDarkMode = () => {
     setIsDarkMode(!isDarkMode);
-    document.documentElement.classList.toggle('dark');
+    document.documentElement.classList.toggle("dark");
   };
 
   const categories = [
     { name: "MEN", path: "/men", available: true },
     { name: "WOMEN", path: "/women", available: true },
-    { name: "KIDS", path: "/kids", available: false }
+    { name: "KIDS", path: "/kids", available: false },
   ];
 
   // Mock search results - in real app, this would come from API
@@ -36,12 +54,13 @@ export default function SearchResults() {
       brand: "DRIPZOID",
       price: 1999,
       originalPrice: 2999,
-      image: "https://images.unsplash.com/photo-1556821840-3a63f95609a7?w=400&h=400&fit=crop",
+      image:
+        "https://images.unsplash.com/photo-1556821840-3a63f95609a7?w=400&h=400&fit=crop",
       rating: 4.5,
       reviews: 128,
       discount: 33,
       category: "Men",
-      tags: ["hoodie", "oversized", "streetwear"]
+      tags: ["hoodie", "oversized", "streetwear"],
     },
     {
       id: 2,
@@ -49,12 +68,13 @@ export default function SearchResults() {
       brand: "DRIPZOID",
       price: 1799,
       originalPrice: 2499,
-      image: "https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=400&h=400&fit=crop",
+      image:
+        "https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=400&h=400&fit=crop",
       rating: 4.3,
       reviews: 89,
       discount: 28,
       category: "Men",
-      tags: ["hoodie", "graphic", "urban"]
+      tags: ["hoodie", "graphic", "urban"],
     },
     {
       id: 3,
@@ -62,12 +82,13 @@ export default function SearchResults() {
       brand: "DRIPZOID",
       price: 2199,
       originalPrice: 2999,
-      image: "https://images.unsplash.com/photo-1556821840-3a63f95609a7?w=400&h=400&fit=crop",
+      image:
+        "https://images.unsplash.com/photo-1556821840-3a63f95609a7?w=400&h=400&fit=crop",
       rating: 4.7,
       reviews: 203,
       discount: 27,
       category: "Men",
-      tags: ["hoodie", "premium", "cotton"]
+      tags: ["hoodie", "premium", "cotton"],
     },
     {
       id: 4,
@@ -75,12 +96,13 @@ export default function SearchResults() {
       brand: "DRIPZOID",
       price: 1899,
       originalPrice: 2599,
-      image: "https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=400&h=400&fit=crop",
+      image:
+        "https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=400&h=400&fit=crop",
       rating: 4.4,
       reviews: 156,
       discount: 27,
       category: "Men",
-      tags: ["hoodie", "zip", "casual"]
+      tags: ["hoodie", "zip", "casual"],
     },
     {
       id: 5,
@@ -88,12 +110,13 @@ export default function SearchResults() {
       brand: "DRIPZOID",
       price: 1699,
       originalPrice: 2199,
-      image: "https://images.unsplash.com/photo-1556821840-3a63f95609a7?w=400&h=400&fit=crop",
+      image:
+        "https://images.unsplash.com/photo-1556821840-3a63f95609a7?w=400&h=400&fit=crop",
       rating: 4.6,
       reviews: 92,
       discount: 23,
       category: "Women",
-      tags: ["hoodie", "cropped", "trendy"]
+      tags: ["hoodie", "cropped", "trendy"],
     },
     {
       id: 6,
@@ -101,13 +124,14 @@ export default function SearchResults() {
       brand: "DRIPZOID",
       price: 1999,
       originalPrice: 2799,
-      image: "https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=400&h=400&fit=crop",
+      image:
+        "https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=400&h=400&fit=crop",
       rating: 4.2,
       reviews: 74,
       discount: 29,
       category: "Men",
-      tags: ["hoodie", "tie-dye", "unique"]
-    }
+      tags: ["hoodie", "tie-dye", "unique"],
+    },
   ];
 
   const filters = {
@@ -118,9 +142,9 @@ export default function SearchResults() {
       { label: "Under ₹999", min: 0, max: 999 },
       { label: "₹1000 - ₹1999", min: 1000, max: 1999 },
       { label: "₹2000 - ₹2999", min: 2000, max: 2999 },
-      { label: "Above ₹3000", min: 3000, max: 99999 }
+      { label: "Above ₹3000", min: 3000, max: 99999 },
     ],
-    colors: ["Black", "White", "Gray", "Blue", "Red", "Green", "Navy", "Olive"]
+    colors: ["Black", "White", "Gray", "Blue", "Red", "Green", "Navy", "Olive"],
   };
 
   const sortOptions = [
@@ -129,7 +153,7 @@ export default function SearchResults() {
     { value: "price_low", label: "Price: Low to High" },
     { value: "price_high", label: "Price: High to Low" },
     { value: "newest", label: "Newest" },
-    { value: "rating", label: "Highest Rated" }
+    { value: "rating", label: "Highest Rated" },
   ];
 
   const handleSearch = (e: React.FormEvent) => {
@@ -147,17 +171,17 @@ export default function SearchResults() {
   };
 
   useEffect(() => {
-    const query = searchParams.get('q');
+    const query = searchParams.get("q");
     if (query) {
       setSearchQuery(query);
     }
   }, [searchParams]);
 
-  const currentQuery = searchParams.get('q') || '';
+  const currentQuery = searchParams.get("q") || "";
   const resultCount = searchResults.length;
 
   return (
-    <div className={`min-h-screen bg-background ${isDarkMode ? 'dark' : ''}`}>
+    <div className={`min-h-screen bg-background ${isDarkMode ? "dark" : ""}`}>
       {/* Navigation Header */}
       <header className="border-b border-border bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 sticky top-0 z-50">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
@@ -165,9 +189,10 @@ export default function SearchResults() {
             {/* Logo */}
             <Link to="/" className="flex items-center space-x-2">
               <img
-                src={isDarkMode
-                  ? "https://cdn.builder.io/api/v1/image/assets%2Fcb420c754f164cb09479ca8042848804%2Fcedb9b0fffa847569c81aa40025b5357?format=webp&width=800"
-                  : "https://cdn.builder.io/api/v1/image/assets%2Fcb420c754f164cb09479ca8042848804%2Fb536f9a54dea43a38ce36553002f4bc2?format=webp&width=800"
+                src={
+                  isDarkMode
+                    ? "https://cdn.builder.io/api/v1/image/assets%2Fcb420c754f164cb09479ca8042848804%2Fcedb9b0fffa847569c81aa40025b5357?format=webp&width=800"
+                    : "https://cdn.builder.io/api/v1/image/assets%2Fcb420c754f164cb09479ca8042848804%2Fb536f9a54dea43a38ce36553002f4bc2?format=webp&width=800"
                 }
                 alt="DRIPZOID"
                 className="h-12 w-auto"
@@ -175,7 +200,10 @@ export default function SearchResults() {
             </Link>
 
             {/* Search Bar */}
-            <form onSubmit={handleSearch} className="hidden md:flex flex-1 max-w-lg mx-8">
+            <form
+              onSubmit={handleSearch}
+              className="hidden md:flex flex-1 max-w-lg mx-8"
+            >
               <div className="relative w-full">
                 <input
                   type="text"
@@ -200,13 +228,15 @@ export default function SearchResults() {
                   key={category.name}
                   to={category.path}
                   className={`text-sm font-medium transition-colors ${
-                    category.available 
-                      ? "text-foreground hover:text-neon-blue" 
+                    category.available
+                      ? "text-foreground hover:text-neon-blue"
                       : "text-muted-foreground cursor-not-allowed"
                   }`}
                 >
                   {category.name}
-                  {!category.available && <span className="ml-1 text-xs">(Soon)</span>}
+                  {!category.available && (
+                    <span className="ml-1 text-xs">(Soon)</span>
+                  )}
                 </Link>
               ))}
             </nav>
@@ -214,7 +244,11 @@ export default function SearchResults() {
             {/* Right side actions */}
             <div className="flex items-center space-x-4">
               <Button variant="ghost" size="icon" onClick={toggleDarkMode}>
-                {isDarkMode ? <Sun className="h-5 w-5" /> : <Moon className="h-5 w-5" />}
+                {isDarkMode ? (
+                  <Sun className="h-5 w-5" />
+                ) : (
+                  <Moon className="h-5 w-5" />
+                )}
               </Button>
               <Button variant="ghost" size="icon" className="md:hidden">
                 <Search className="h-5 w-5" />
@@ -288,14 +322,16 @@ export default function SearchResults() {
                   key={category.name}
                   to={category.path}
                   className={`block py-2 text-sm font-medium transition-colors ${
-                    category.available 
-                      ? "text-foreground hover:text-neon-blue" 
+                    category.available
+                      ? "text-foreground hover:text-neon-blue"
                       : "text-muted-foreground cursor-not-allowed"
                   }`}
                   onClick={() => setIsMenuOpen(false)}
                 >
                   {category.name}
-                  {!category.available && <span className="ml-1 text-xs">(Soon)</span>}
+                  {!category.available && (
+                    <span className="ml-1 text-xs">(Soon)</span>
+                  )}
                 </Link>
               ))}
             </nav>
@@ -306,7 +342,9 @@ export default function SearchResults() {
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {/* Breadcrumb */}
         <div className="flex items-center gap-2 text-sm text-muted-foreground mb-6">
-          <Link to="/" className="hover:text-foreground">Home</Link>
+          <Link to="/" className="hover:text-foreground">
+            Home
+          </Link>
           <span>/</span>
           <span className="text-foreground">Search Results</span>
         </div>
@@ -315,28 +353,32 @@ export default function SearchResults() {
         <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-8">
           <div>
             <h1 className="text-2xl md:text-3xl font-bold mb-2">
-              {currentQuery ? `Search Results for "${currentQuery}"` : 'Search Results'}
+              {currentQuery
+                ? `Search Results for "${currentQuery}"`
+                : "Search Results"}
             </h1>
             <p className="text-muted-foreground">
-              {resultCount} product{resultCount !== 1 ? 's' : ''} found
+              {resultCount} product{resultCount !== 1 ? "s" : ""} found
               {currentQuery && ` for "${currentQuery}"`}
             </p>
           </div>
-          
+
           {/* Sort and Filter */}
           <div className="flex items-center gap-4">
-            <select 
-              value={sortBy} 
+            <select
+              value={sortBy}
               onChange={(e) => setSortBy(e.target.value)}
               className="px-3 py-2 border border-border rounded-lg bg-background"
             >
-              {sortOptions.map(option => (
-                <option key={option.value} value={option.value}>{option.label}</option>
+              {sortOptions.map((option) => (
+                <option key={option.value} value={option.value}>
+                  {option.label}
+                </option>
               ))}
             </select>
-            
-            <Button 
-              variant="outline" 
+
+            <Button
+              variant="outline"
               onClick={() => setIsFilterOpen(!isFilterOpen)}
               className="md:hidden"
             >
@@ -354,13 +396,16 @@ export default function SearchResults() {
                 <SlidersHorizontal className="h-4 w-4" />
                 Filters
               </h3>
-              
+
               {/* Category Filter */}
               <div className="mb-6">
                 <h4 className="font-medium mb-3">Category</h4>
                 <div className="space-y-2">
-                  {filters.categories.map(category => (
-                    <label key={category} className="flex items-center gap-2 cursor-pointer">
+                  {filters.categories.map((category) => (
+                    <label
+                      key={category}
+                      className="flex items-center gap-2 cursor-pointer"
+                    >
                       <input type="checkbox" className="rounded" />
                       <span className="text-sm">{category}</span>
                     </label>
@@ -372,8 +417,12 @@ export default function SearchResults() {
               <div className="mb-6">
                 <h4 className="font-medium mb-3">Size</h4>
                 <div className="flex flex-wrap gap-2">
-                  {filters.sizes.map(size => (
-                    <Badge key={size} variant="outline" className="cursor-pointer hover:bg-neon-blue hover:text-neon-foreground">
+                  {filters.sizes.map((size) => (
+                    <Badge
+                      key={size}
+                      variant="outline"
+                      className="cursor-pointer hover:bg-neon-blue hover:text-neon-foreground"
+                    >
                       {size}
                     </Badge>
                   ))}
@@ -384,8 +433,11 @@ export default function SearchResults() {
               <div className="mb-6">
                 <h4 className="font-medium mb-3">Price</h4>
                 <div className="space-y-2">
-                  {filters.priceRanges.map(range => (
-                    <label key={range.label} className="flex items-center gap-2 cursor-pointer">
+                  {filters.priceRanges.map((range) => (
+                    <label
+                      key={range.label}
+                      className="flex items-center gap-2 cursor-pointer"
+                    >
                       <input type="checkbox" className="rounded" />
                       <span className="text-sm">{range.label}</span>
                     </label>
@@ -397,8 +449,11 @@ export default function SearchResults() {
               <div className="mb-6">
                 <h4 className="font-medium mb-3">Brand</h4>
                 <div className="space-y-2">
-                  {filters.brands.map(brand => (
-                    <label key={brand} className="flex items-center gap-2 cursor-pointer">
+                  {filters.brands.map((brand) => (
+                    <label
+                      key={brand}
+                      className="flex items-center gap-2 cursor-pointer"
+                    >
                       <input type="checkbox" className="rounded" />
                       <span className="text-sm">{brand}</span>
                     </label>
@@ -419,26 +474,31 @@ export default function SearchResults() {
               /* No Results */
               <div className="text-center py-16">
                 <Search className="h-24 w-24 mx-auto mb-6 text-muted-foreground" />
-                <h2 className="text-2xl font-semibold mb-4">No results found</h2>
+                <h2 className="text-2xl font-semibold mb-4">
+                  No results found
+                </h2>
                 <p className="text-muted-foreground mb-8">
-                  Try adjusting your search or filters to find what you're looking for.
+                  Try adjusting your search or filters to find what you're
+                  looking for.
                 </p>
                 <div className="space-y-2">
                   <p className="font-medium">Search suggestions:</p>
                   <div className="flex flex-wrap gap-2 justify-center">
-                    {["hoodie", "jeans", "t-shirt", "sneakers", "jacket"].map(suggestion => (
-                      <Badge 
-                        key={suggestion} 
-                        variant="outline" 
-                        className="cursor-pointer hover:bg-neon-blue hover:text-neon-foreground"
-                        onClick={() => {
-                          setSearchQuery(suggestion);
-                          setSearchParams({ q: suggestion });
-                        }}
-                      >
-                        {suggestion}
-                      </Badge>
-                    ))}
+                    {["hoodie", "jeans", "t-shirt", "sneakers", "jacket"].map(
+                      (suggestion) => (
+                        <Badge
+                          key={suggestion}
+                          variant="outline"
+                          className="cursor-pointer hover:bg-neon-blue hover:text-neon-foreground"
+                          onClick={() => {
+                            setSearchQuery(suggestion);
+                            setSearchParams({ q: suggestion });
+                          }}
+                        >
+                          {suggestion}
+                        </Badge>
+                      ),
+                    )}
                   </div>
                 </div>
               </div>
@@ -461,7 +521,7 @@ export default function SearchResults() {
                         <Button
                           variant="ghost"
                           size="icon"
-                          className={`absolute top-2 right-2 ${isDarkMode ? 'bg-black/80 hover:bg-black' : 'bg-white/80 hover:bg-white'}`}
+                          className={`absolute top-2 right-2 ${isDarkMode ? "bg-black/80 hover:bg-black" : "bg-white/80 hover:bg-white"}`}
                           onClick={(e) => {
                             e.preventDefault();
                             e.stopPropagation();
@@ -470,15 +530,21 @@ export default function SearchResults() {
                             }
                           }}
                         >
-                          <Heart className={`h-4 w-4 ${isInWishlist(product.id) ? 'fill-red-500 text-red-500' : isDarkMode ? 'text-white' : 'text-black'}`} />
+                          <Heart
+                            className={`h-4 w-4 ${isInWishlist(product.id) ? "fill-red-500 text-red-500" : isDarkMode ? "text-white" : "text-black"}`}
+                          />
                         </Button>
                       </div>
                     </Link>
 
                     <div>
-                      <p className="text-xs text-muted-foreground mb-1">{product.brand}</p>
+                      <p className="text-xs text-muted-foreground mb-1">
+                        {product.brand}
+                      </p>
                       <Link to={`/product/${product.id}`}>
-                        <h3 className="font-semibold text-lg mb-1 hover:text-neon-blue">{product.name}</h3>
+                        <h3 className="font-semibold text-lg mb-1 hover:text-neon-blue">
+                          {product.name}
+                        </h3>
                       </Link>
 
                       <div className="flex items-center gap-1 mb-2">
@@ -487,8 +553,8 @@ export default function SearchResults() {
                             key={i}
                             className={`h-4 w-4 ${
                               i < Math.floor(product.rating)
-                                ? 'fill-neon-blue text-neon-blue'
-                                : 'text-muted-foreground'
+                                ? "fill-neon-blue text-neon-blue"
+                                : "text-muted-foreground"
                             }`}
                           />
                         ))}
@@ -498,9 +564,13 @@ export default function SearchResults() {
                       </div>
 
                       <div className="flex items-center gap-2 mb-3">
-                        <span className="text-lg font-bold">₹{product.price}</span>
+                        <span className="text-lg font-bold">
+                          ₹{product.price}
+                        </span>
                         {product.originalPrice && (
-                          <span className="text-sm text-muted-foreground line-through">₹{product.originalPrice}</span>
+                          <span className="text-sm text-muted-foreground line-through">
+                            ₹{product.originalPrice}
+                          </span>
                         )}
                       </div>
 
@@ -528,7 +598,7 @@ export default function SearchResults() {
                             e.preventDefault();
                             if (requireAuth()) {
                               addToCart(product);
-                              navigate('/checkout');
+                              navigate("/checkout");
                             }
                           }}
                         >
@@ -540,7 +610,7 @@ export default function SearchResults() {
                 ))}
               </div>
             )}
-            
+
             {/* Load More */}
             {resultCount > 0 && (
               <div className="text-center mt-12">
@@ -559,42 +629,60 @@ export default function SearchResults() {
           <div className="fixed right-0 top-0 h-full w-80 bg-background p-6 overflow-y-auto">
             <div className="flex items-center justify-between mb-6">
               <h3 className="text-lg font-semibold">Filters</h3>
-              <Button variant="ghost" size="icon" onClick={() => setIsFilterOpen(false)}>
+              <Button
+                variant="ghost"
+                size="icon"
+                onClick={() => setIsFilterOpen(false)}
+              >
                 <X className="h-4 w-4" />
               </Button>
             </div>
-            
+
             {/* Mobile filter content (same as desktop) */}
             <div className="space-y-6">
               <div>
                 <h4 className="font-medium mb-3">Category</h4>
                 <div className="space-y-2">
-                  {filters.categories.map(category => (
-                    <label key={category} className="flex items-center gap-2 cursor-pointer">
+                  {filters.categories.map((category) => (
+                    <label
+                      key={category}
+                      className="flex items-center gap-2 cursor-pointer"
+                    >
                       <input type="checkbox" className="rounded" />
                       <span className="text-sm">{category}</span>
                     </label>
                   ))}
                 </div>
               </div>
-              
+
               <div>
                 <h4 className="font-medium mb-3">Size</h4>
                 <div className="flex flex-wrap gap-2">
-                  {filters.sizes.map(size => (
-                    <Badge key={size} variant="outline" className="cursor-pointer hover:bg-neon-blue hover:text-neon-foreground">
+                  {filters.sizes.map((size) => (
+                    <Badge
+                      key={size}
+                      variant="outline"
+                      className="cursor-pointer hover:bg-neon-blue hover:text-neon-foreground"
+                    >
                       {size}
                     </Badge>
                   ))}
                 </div>
               </div>
             </div>
-            
+
             <div className="flex gap-2 mt-8">
-              <Button variant="outline" className="flex-1" onClick={() => setIsFilterOpen(false)}>
+              <Button
+                variant="outline"
+                className="flex-1"
+                onClick={() => setIsFilterOpen(false)}
+              >
                 Clear All
               </Button>
-              <Button className="flex-1 bg-neon-blue hover:bg-neon-blue/90" onClick={() => setIsFilterOpen(false)}>
+              <Button
+                className="flex-1 bg-neon-blue hover:bg-neon-blue/90"
+                onClick={() => setIsFilterOpen(false)}
+              >
                 Apply Filters
               </Button>
             </div>

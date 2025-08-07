@@ -48,18 +48,20 @@ export const useCart = () => {
   return context;
 };
 
-export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+export const CartProvider: React.FC<{ children: React.ReactNode }> = ({
+  children,
+}) => {
   const [cartItems, setCartItems] = useState<CartItem[]>([]);
   const [wishlistItems, setWishlistItems] = useState<WishlistItem[]>([]);
 
   const addToCart = (product: any) => {
-    setCartItems(prev => {
-      const existingItem = prev.find(item => item.id === product.id);
+    setCartItems((prev) => {
+      const existingItem = prev.find((item) => item.id === product.id);
       if (existingItem) {
-        return prev.map(item =>
+        return prev.map((item) =>
           item.id === product.id
             ? { ...item, quantity: item.quantity + 1 }
-            : item
+            : item,
         );
       }
       return [...prev, { ...product, quantity: 1 }];
@@ -67,7 +69,7 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children
   };
 
   const removeFromCart = (id: number) => {
-    setCartItems(prev => prev.filter(item => item.id !== id));
+    setCartItems((prev) => prev.filter((item) => item.id !== id));
   };
 
   const updateQuantity = (id: number, quantity: number) => {
@@ -75,33 +77,34 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children
       removeFromCart(id);
       return;
     }
-    setCartItems(prev =>
-      prev.map(item =>
-        item.id === id ? { ...item, quantity } : item
-      )
+    setCartItems((prev) =>
+      prev.map((item) => (item.id === id ? { ...item, quantity } : item)),
     );
   };
 
   const addToWishlist = (product: any) => {
-    setWishlistItems(prev => {
-      const isAlreadyInWishlist = prev.some(item => item.id === product.id);
+    setWishlistItems((prev) => {
+      const isAlreadyInWishlist = prev.some((item) => item.id === product.id);
       if (isAlreadyInWishlist) {
-        return prev.filter(item => item.id !== product.id);
+        return prev.filter((item) => item.id !== product.id);
       }
       return [...prev, { ...product, inStock: true }];
     });
   };
 
   const removeFromWishlist = (id: number) => {
-    setWishlistItems(prev => prev.filter(item => item.id !== id));
+    setWishlistItems((prev) => prev.filter((item) => item.id !== id));
   };
 
   const isInWishlist = (id: number) => {
-    return wishlistItems.some(item => item.id === id);
+    return wishlistItems.some((item) => item.id === id);
   };
 
   const getCartTotal = () => {
-    return cartItems.reduce((total, item) => total + (item.price * item.quantity), 0);
+    return cartItems.reduce(
+      (total, item) => total + item.price * item.quantity,
+      0,
+    );
   };
 
   const getCartCount = () => {

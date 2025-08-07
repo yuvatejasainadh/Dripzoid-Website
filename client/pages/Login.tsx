@@ -1,6 +1,14 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { Moon, Sun, Smartphone, Mail, ArrowRight, ArrowLeft, CheckCircle } from "lucide-react";
+import {
+  Moon,
+  Sun,
+  Smartphone,
+  Mail,
+  ArrowRight,
+  ArrowLeft,
+  CheckCircle,
+} from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { useAuth } from "../context/AuthContext";
@@ -18,13 +26,13 @@ export default function Login() {
   // Redirect if already logged in
   useEffect(() => {
     if (isLoggedIn) {
-      window.location.href = '/';
+      window.location.href = "/";
     }
   }, [isLoggedIn]);
 
   const toggleDarkMode = () => {
     setIsDarkMode(!isDarkMode);
-    document.documentElement.classList.toggle('dark');
+    document.documentElement.classList.toggle("dark");
   };
 
   const sendOTP = () => {
@@ -54,7 +62,8 @@ export default function Login() {
         firstName: loginMethod === "phone" ? "Demo" : email.split("@")[0],
         lastName: "User",
         email: loginMethod === "phone" ? `${phoneNumber}@example.com` : email,
-        phone: loginMethod === "phone" ? `+91 ${phoneNumber}` : "+91 9876543210"
+        phone:
+          loginMethod === "phone" ? `+91 ${phoneNumber}` : "+91 9876543210",
       };
 
       login(userData);
@@ -75,7 +84,7 @@ export default function Login() {
         firstName: email.split("@")[0],
         lastName: "User",
         email: email,
-        phone: "+91 9876543210"
+        phone: "+91 9876543210",
       };
 
       login(userData);
@@ -89,7 +98,7 @@ export default function Login() {
   };
 
   return (
-    <div className={`min-h-screen bg-background ${isDarkMode ? 'dark' : ''}`}>
+    <div className={`min-h-screen bg-background ${isDarkMode ? "dark" : ""}`}>
       {/* Navigation Header */}
       <header className="border-b border-border bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
@@ -97,9 +106,10 @@ export default function Login() {
             {/* Logo */}
             <Link to="/" className="flex items-center space-x-2">
               <img
-                src={isDarkMode
-                  ? "https://cdn.builder.io/api/v1/image/assets%2Fcb420c754f164cb09479ca8042848804%2Fcedb9b0fffa847569c81aa40025b5357?format=webp&width=800"
-                  : "https://cdn.builder.io/api/v1/image/assets%2Fcb420c754f164cb09479ca8042848804%2Fb536f9a54dea43a38ce36553002f4bc2?format=webp&width=800"
+                src={
+                  isDarkMode
+                    ? "https://cdn.builder.io/api/v1/image/assets%2Fcb420c754f164cb09479ca8042848804%2Fcedb9b0fffa847569c81aa40025b5357?format=webp&width=800"
+                    : "https://cdn.builder.io/api/v1/image/assets%2Fcb420c754f164cb09479ca8042848804%2Fb536f9a54dea43a38ce36553002f4bc2?format=webp&width=800"
                 }
                 alt="DRIPZOID"
                 className="h-12 w-auto"
@@ -109,7 +119,11 @@ export default function Login() {
             {/* Right side actions */}
             <div className="flex items-center space-x-4">
               <Button variant="ghost" size="icon" onClick={toggleDarkMode}>
-                {isDarkMode ? <Sun className="h-5 w-5" /> : <Moon className="h-5 w-5" />}
+                {isDarkMode ? (
+                  <Sun className="h-5 w-5" />
+                ) : (
+                  <Moon className="h-5 w-5" />
+                )}
               </Button>
             </div>
           </div>
@@ -135,22 +149,31 @@ export default function Login() {
                   {step === "input" ? "Welcome Back" : "Verify OTP"}
                 </h1>
                 <p className="text-muted-foreground">
-                  {step === "input" 
-                    ? "Sign in to your DRIPZOID account" 
-                    : `We've sent a 6-digit code to ${loginMethod === "phone" ? `+91 ${phoneNumber}` : email}`
-                  }
+                  {step === "input"
+                    ? "Sign in to your DRIPZOID account"
+                    : `We've sent a 6-digit code to ${loginMethod === "phone" ? `+91 ${phoneNumber}` : email}`}
                 </p>
               </div>
 
               {step === "input" ? (
                 /* Input Step */
-                <Tabs value={loginMethod} onValueChange={setLoginMethod} className="space-y-6">
+                <Tabs
+                  value={loginMethod}
+                  onValueChange={setLoginMethod}
+                  className="space-y-6"
+                >
                   <TabsList className="grid w-full grid-cols-2">
-                    <TabsTrigger value="phone" className="flex items-center gap-2">
+                    <TabsTrigger
+                      value="phone"
+                      className="flex items-center gap-2"
+                    >
                       <Smartphone className="h-4 w-4" />
                       Phone
                     </TabsTrigger>
-                    <TabsTrigger value="email" className="flex items-center gap-2">
+                    <TabsTrigger
+                      value="email"
+                      className="flex items-center gap-2"
+                    >
                       <Mail className="h-4 w-4" />
                       Email
                     </TabsTrigger>
@@ -158,7 +181,9 @@ export default function Login() {
 
                   <TabsContent value="phone" className="space-y-4">
                     <div>
-                      <label className="block text-sm font-medium mb-2">Phone Number</label>
+                      <label className="block text-sm font-medium mb-2">
+                        Phone Number
+                      </label>
                       <div className="flex">
                         <span className="inline-flex items-center px-3 py-2 border border-r-0 border-border rounded-l-lg bg-muted text-muted-foreground">
                           +91
@@ -166,14 +191,18 @@ export default function Login() {
                         <input
                           type="tel"
                           value={phoneNumber}
-                          onChange={(e) => setPhoneNumber(e.target.value.replace(/\D/g, '').slice(0, 10))}
+                          onChange={(e) =>
+                            setPhoneNumber(
+                              e.target.value.replace(/\D/g, "").slice(0, 10),
+                            )
+                          }
                           className="flex-1 px-3 py-2 border border-border rounded-r-lg"
                           placeholder="9876543210"
                         />
                       </div>
                     </div>
 
-                    <Button 
+                    <Button
                       onClick={sendOTP}
                       className="w-full bg-neon-blue hover:bg-neon-blue/90 text-neon-foreground"
                       disabled={phoneNumber.length !== 10}
@@ -185,16 +214,28 @@ export default function Login() {
                     <div className="text-center">
                       <p className="text-sm text-muted-foreground">
                         By continuing, you agree to our{" "}
-                        <Link to="/terms" className="text-neon-blue hover:underline">Terms of Service</Link>{" "}
+                        <Link
+                          to="/terms"
+                          className="text-neon-blue hover:underline"
+                        >
+                          Terms of Service
+                        </Link>{" "}
                         and{" "}
-                        <Link to="/privacy" className="text-neon-blue hover:underline">Privacy Policy</Link>
+                        <Link
+                          to="/privacy"
+                          className="text-neon-blue hover:underline"
+                        >
+                          Privacy Policy
+                        </Link>
                       </p>
                     </div>
                   </TabsContent>
 
                   <TabsContent value="email" className="space-y-4">
                     <div>
-                      <label className="block text-sm font-medium mb-2">Email Address</label>
+                      <label className="block text-sm font-medium mb-2">
+                        Email Address
+                      </label>
                       <input
                         type="email"
                         value={email}
@@ -205,7 +246,9 @@ export default function Login() {
                     </div>
 
                     <div>
-                      <label className="block text-sm font-medium mb-2">Password</label>
+                      <label className="block text-sm font-medium mb-2">
+                        Password
+                      </label>
                       <input
                         type="password"
                         value={password}
@@ -216,7 +259,7 @@ export default function Login() {
                     </div>
 
                     <div className="space-y-3">
-                      <Button 
+                      <Button
                         onClick={loginWithPassword}
                         className="w-full bg-neon-blue hover:bg-neon-blue/90 text-neon-foreground"
                         disabled={!email.includes("@") || password.length < 6}
@@ -226,10 +269,12 @@ export default function Login() {
                       </Button>
 
                       <div className="text-center">
-                        <span className="text-sm text-muted-foreground">OR</span>
+                        <span className="text-sm text-muted-foreground">
+                          OR
+                        </span>
                       </div>
 
-                      <Button 
+                      <Button
                         onClick={sendOTP}
                         variant="outline"
                         className="w-full"
@@ -240,7 +285,10 @@ export default function Login() {
                     </div>
 
                     <div className="text-center">
-                      <Link to="/forgot-password" className="text-sm text-neon-blue hover:underline">
+                      <Link
+                        to="/forgot-password"
+                        className="text-sm text-neon-blue hover:underline"
+                      >
                         Forgot your password?
                       </Link>
                     </div>
@@ -250,11 +298,15 @@ export default function Login() {
                 /* OTP Verification Step */
                 <div className="space-y-6">
                   <div>
-                    <label className="block text-sm font-medium mb-2">Enter 6-digit OTP</label>
+                    <label className="block text-sm font-medium mb-2">
+                      Enter 6-digit OTP
+                    </label>
                     <input
                       type="text"
                       value={otp}
-                      onChange={(e) => setOtp(e.target.value.replace(/\D/g, '').slice(0, 6))}
+                      onChange={(e) =>
+                        setOtp(e.target.value.replace(/\D/g, "").slice(0, 6))
+                      }
                       className="w-full px-3 py-2 border border-border rounded-lg text-center text-lg tracking-widest"
                       placeholder="123456"
                       maxLength={6}
@@ -264,7 +316,7 @@ export default function Login() {
                     </p>
                   </div>
 
-                  <Button 
+                  <Button
                     onClick={verifyOTP}
                     className="w-full bg-neon-blue hover:bg-neon-blue/90 text-neon-foreground"
                     disabled={otp.length !== 6}
@@ -281,7 +333,7 @@ export default function Login() {
                       <ArrowLeft className="h-3 w-3" />
                       Back
                     </button>
-                    
+
                     <button className="text-neon-blue hover:underline">
                       Resend OTP
                     </button>
@@ -296,7 +348,10 @@ export default function Login() {
             <div className="mt-8 text-center">
               <p className="text-muted-foreground">
                 Don't have an account?{" "}
-                <Link to="/signup" className="text-neon-blue hover:underline font-medium">
+                <Link
+                  to="/signup"
+                  className="text-neon-blue hover:underline font-medium"
+                >
                   Create one
                 </Link>
               </p>
