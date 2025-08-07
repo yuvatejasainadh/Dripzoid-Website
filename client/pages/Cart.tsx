@@ -116,8 +116,10 @@ export default function Cart() {
                   </Badge>
                 )}
               </Button>
-              <Button variant="ghost" size="icon">
-                <User className="h-5 w-5" />
+              <Button variant="ghost" size="icon" asChild>
+                <Link to="/profile">
+                  <User className="h-5 w-5" />
+                </Link>
               </Button>
               <Button
                 variant="ghost"
