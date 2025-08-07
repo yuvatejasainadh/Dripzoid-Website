@@ -351,7 +351,7 @@ export default function Men() {
                       <Button
                         variant="ghost"
                         size="icon"
-                        className="absolute top-2 right-2 bg-white/80 hover:bg-white"
+                        className={`absolute top-2 right-2 ${isDarkMode ? 'bg-black/80 hover:bg-black' : 'bg-white/80 hover:bg-white'}`}
                         onClick={(e) => {
                           e.preventDefault();
                           e.stopPropagation();
@@ -360,7 +360,7 @@ export default function Men() {
                           }
                         }}
                       >
-                        <Heart className={`h-4 w-4 ${isInWishlist(product.id) ? 'fill-red-500 text-red-500' : ''}`} />
+                        <Heart className={`h-4 w-4 ${isInWishlist(product.id) ? 'fill-red-500 text-red-500' : isDarkMode ? 'text-white' : 'text-black'}`} />
                       </Button>
                     </div>
                   </Link>
