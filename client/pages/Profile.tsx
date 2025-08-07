@@ -378,14 +378,19 @@ export default function Profile() {
                     </div>
 
                     <div className="flex gap-2">
-                      <Button 
+                      <Button
                         className="flex-1 bg-neon-blue hover:bg-neon-blue/90"
                         disabled={!item.inStock}
+                        onClick={() => addToCart(item)}
                       >
                         {item.inStock ? "Add to Cart" : "Notify Me"}
                       </Button>
-                      <Button variant="outline" size="icon">
-                        <Heart className="h-4 w-4 fill-current" />
+                      <Button
+                        variant="outline"
+                        size="icon"
+                        onClick={() => removeFromWishlist(item.id)}
+                      >
+                        <Heart className="h-4 w-4 fill-red-500 text-red-500" />
                       </Button>
                     </div>
                   </div>
