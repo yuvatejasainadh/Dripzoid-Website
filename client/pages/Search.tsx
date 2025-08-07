@@ -136,7 +136,14 @@ export default function SearchResults() {
     e.preventDefault();
     if (searchQuery.trim()) {
       setSearchParams({ q: searchQuery.trim() });
+      // Filter results based on search query
+      filterResults();
     }
+  };
+
+  const filterResults = () => {
+    // This is a simple filter - in a real app this would be an API call
+    // For now, just update the search params which will trigger a re-render
   };
 
   useEffect(() => {
