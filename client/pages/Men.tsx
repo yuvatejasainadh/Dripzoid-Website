@@ -424,14 +424,16 @@ export default function Men() {
                       <Button
                         variant="outline"
                         className="flex-1"
-                        onClick={(e) => {
+                        asChild
+                      >
+                        <Link to="/checkout" onClick={(e) => {
                           e.preventDefault();
                           if (requireAuth()) {
                             window.location.href = '/checkout';
                           }
-                        }}
-                      >
-                        Buy Now
+                        }}>
+                          Buy Now
+                        </Link>
                       </Button>
                     </div>
                   </div>
