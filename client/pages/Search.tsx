@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Link, useSearchParams } from "react-router-dom";
+import { Link, useSearchParams, useNavigate } from "react-router-dom";
 import { ShoppingBag, Heart, Search, User, Menu, Moon, Sun, Star, Filter, SlidersHorizontal, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -15,6 +15,7 @@ export default function SearchResults() {
   const [sortBy, setSortBy] = useState("relevance");
   const { addToCart, addToWishlist, isInWishlist, getCartCount, wishlistItems } = useCart();
   const { isLoggedIn, requireAuth } = useAuth();
+  const navigate = useNavigate();
 
   const toggleDarkMode = () => {
     setIsDarkMode(!isDarkMode);
@@ -527,7 +528,8 @@ export default function SearchResults() {
                           onClick={(e) => {
                             e.preventDefault();
                             if (requireAuth()) {
-                              window.location.href = '/checkout';
+                              addToCart(product);
+                              navigate('/checkout');
                             }
                           }}
                         >
