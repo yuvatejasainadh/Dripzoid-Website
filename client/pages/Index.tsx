@@ -183,7 +183,7 @@ export default function Index() {
               : "https://cdn.builder.io/api/v1/image/assets%2Fcb420c754f164cb09479ca8042848804%2Fb536f9a54dea43a38ce36553002f4bc2?format=webp&width=800"
             }
             alt="DRIPZOID"
-            className="h-32 md:h-48 w-auto mx-auto mb-4"
+            className="h-20 md:h-32 w-auto mx-auto mb-4"
           />
           <h1 className="text-2xl md:text-4xl font-bold text-foreground mb-6">
             STYLE THAT POPS
