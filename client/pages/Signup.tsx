@@ -91,9 +91,22 @@ export default function Signup() {
 
   const verifyOTP = () => {
     if (otp === "123456") {
+      // Create user data for signup/login
+      const userData = {
+        id: "user_" + Date.now(),
+        firstName: formData.firstName,
+        lastName: formData.lastName,
+        email: signupMethod === "phone" ?
+          (formData.email || `${formData.phoneNumber}@example.com`) :
+          formData.email,
+        phone: signupMethod === "phone" ?
+          `+91 ${formData.phoneNumber}` :
+          (formData.phoneNumber ? `+91 ${formData.phoneNumber}` : "+91 9876543210")
+      };
+
+      login(userData);
       setStep("success");
       setTimeout(() => {
-        // Redirect to home page
         window.location.href = "/";
       }, 2000);
     } else {
