@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { ShoppingBag, Heart, Search, User, Menu, Moon, Sun, Star } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -12,6 +12,7 @@ export default function Index() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const { addToCart, addToWishlist, isInWishlist, getCartCount, wishlistItems } = useCart();
   const { isLoggedIn, user, requireAuth } = useAuth();
+  const navigate = useNavigate();
 
   const toggleDarkMode = () => {
     setIsDarkMode(!isDarkMode);
@@ -64,8 +65,7 @@ export default function Index() {
   const categories = [
     { name: "MEN", path: "/men", available: true },
     { name: "WOMEN", path: "/women", available: true },
-    { name: "KIDS", path: "/kids", available: false },
-    { name: "ACCESSORIES", path: "/accessories", available: false }
+    { name: "KIDS", path: "/kids", available: false }
   ];
 
   return (
@@ -330,7 +330,8 @@ export default function Index() {
                       onClick={(e) => {
                         e.preventDefault();
                         if (requireAuth()) {
-                          window.location.href = '/checkout';
+                          addToCart(product);
+                          navigate('/checkout');
                         }
                       }}
                     >
