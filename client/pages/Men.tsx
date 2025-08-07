@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { ShoppingBag, Heart, User, Menu, Moon, Sun, Star, Filter, SlidersHorizontal } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -6,12 +6,22 @@ import { Badge } from "@/components/ui/badge";
 import { useCart } from "../context/CartContext";
 import { useAuth } from "../context/AuthContext";
 import SearchBar from "../components/SearchBar";
+import { db, Product } from "../lib/database";
 
 export default function Men() {
   const [isDarkMode, setIsDarkMode] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isFilterOpen, setIsFilterOpen] = useState(false);
   const [sortBy, setSortBy] = useState("popularity");
+  const [products, setProducts] = useState<Product[]>([]);
+  const [filteredProducts, setFilteredProducts] = useState<Product[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [selectedFilters, setSelectedFilters] = useState({
+    sizes: [] as string[],
+    brands: [] as string[],
+    priceRange: null as { min: number; max: number } | null,
+    colors: [] as string[]
+  });
   const { addToCart, addToWishlist, isInWishlist, getCartCount, wishlistItems } = useCart();
   const { isLoggedIn, requireAuth } = useAuth();
   const navigate = useNavigate();
@@ -27,86 +37,97 @@ export default function Men() {
     { name: "KIDS", path: "/kids", available: false }
   ];
 
-  const products = [
-    {
-      id: 1,
-      name: "Oversized Drip Hoodie",
-      price: 1999,
-      originalPrice: 2999,
-      image: "https://images.unsplash.com/photo-1556821840-3a63f95609a7?w=400&h=400&fit=crop",
-      brand: "DRIPZOID",
-      rating: 4.5,
-      reviews: 128,
-      discount: 33,
-      sizes: ["S", "M", "L", "XL", "XXL"],
-      colors: ["Black", "White", "Gray"]
-    },
-    {
-      id: 2,
-      name: "Streetwear Cargo Pants",
-      price: 1799,
-      originalPrice: 2299,
-      image: "https://images.unsplash.com/photo-1473966968600-fa801b869a1a?w=400&h=400&fit=crop",
-      brand: "DRIPZOID",
-      rating: 4.3,
-      reviews: 89,
-      discount: 22,
-      sizes: ["S", "M", "L", "XL"],
-      colors: ["Olive", "Black", "Navy"]
-    },
-    {
-      id: 3,
-      name: "Urban Graphic Tee",
-      price: 799,
-      originalPrice: 1299,
-      image: "https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=400&h=400&fit=crop",
-      brand: "DRIPZOID",
-      rating: 4.6,
-      reviews: 203,
-      discount: 38,
-      sizes: ["S", "M", "L", "XL", "XXL"],
-      colors: ["Black", "White", "Red"]
-    },
-    {
-      id: 4,
-      name: "Denim Bomber Jacket",
-      price: 2499,
-      originalPrice: 3499,
-      image: "https://images.unsplash.com/photo-1544966503-7cc5ac882d5c?w=400&h=400&fit=crop",
-      brand: "DRIPZOID",
-      rating: 4.8,
-      reviews: 67,
-      discount: 29,
-      sizes: ["S", "M", "L", "XL"],
-      colors: ["Blue", "Black"]
-    },
-    {
-      id: 5,
-      name: "Sweat Shorts",
-      price: 899,
-      originalPrice: 1199,
-      image: "https://images.unsplash.com/photo-1591195853828-11db59a44f6b?w=400&h=400&fit=crop",
-      brand: "DRIPZOID",
-      rating: 4.2,
-      reviews: 156,
-      discount: 25,
-      sizes: ["S", "M", "L", "XL"],
-      colors: ["Black", "Gray", "Navy"]
-    },
-    {
-      id: 6,
-      name: "Oversized Tank Top",
-      price: 699,
-      originalPrice: 999,
-      image: "https://images.unsplash.com/photo-1618354691373-d851c5c3a990?w=400&h=400&fit=crop",
-      brand: "DRIPZOID",
-      rating: 4.4,
-      reviews: 92,
-      discount: 30,
-      sizes: ["S", "M", "L", "XL", "XXL"],
-      colors: ["White", "Black", "Gray"]
+  // Load products from database
+  useEffect(() => {
+    loadProducts();
+  }, []);
+
+  // Apply filters and sorting when they change
+  useEffect(() => {
+    applyFiltersAndSort();
+  }, [products, selectedFilters, sortBy]);
+
+  const loadProducts = async () => {
+    try {
+      setLoading(true);
+      const menProducts = await db.getProducts({ category: 'Men' });
+      setProducts(menProducts);
+    } catch (error) {
+      console.error('Error loading products:', error);
+    } finally {
+      setLoading(false);
     }
-  ];
+  };
+
+  const applyFiltersAndSort = async () => {
+    try {
+      let filtered = [...products];
+      
+      // Apply size filter
+      if (selectedFilters.sizes.length > 0) {
+        filtered = filtered.filter(product => 
+          product.sizes.some(size => selectedFilters.sizes.includes(size))
+        );
+      }
+      
+      // Apply brand filter
+      if (selectedFilters.brands.length > 0) {
+        filtered = filtered.filter(product => 
+          selectedFilters.brands.includes(product.brand)
+        );
+      }
+      
+      // Apply price filter
+      if (selectedFilters.priceRange) {
+        filtered = filtered.filter(product => 
+          product.price >= selectedFilters.priceRange!.min && 
+          product.price <= selectedFilters.priceRange!.max
+        );
+      }
+      
+      // Apply color filter
+      if (selectedFilters.colors.length > 0) {
+        filtered = filtered.filter(product => 
+          product.colors.some(color => selectedFilters.colors.includes(color))
+        );
+      }
+      
+      // Apply sorting
+      const sorted = await db.sortProducts(filtered, sortBy);
+      setFilteredProducts(sorted);
+    } catch (error) {
+      console.error('Error applying filters:', error);
+    }
+  };
+
+  const toggleFilter = (filterType: keyof typeof selectedFilters, value: string | { min: number; max: number }) => {
+    setSelectedFilters(prev => {
+      if (filterType === 'priceRange') {
+        return {
+          ...prev,
+          priceRange: prev.priceRange?.min === (value as any).min ? null : value as { min: number; max: number }
+        };
+      } else {
+        const currentValues = prev[filterType] as string[];
+        const newValues = currentValues.includes(value as string)
+          ? currentValues.filter(v => v !== value)
+          : [...currentValues, value as string];
+        return {
+          ...prev,
+          [filterType]: newValues
+        };
+      }
+    });
+  };
+
+  const clearAllFilters = () => {
+    setSelectedFilters({
+      sizes: [],
+      brands: [],
+      priceRange: null,
+      colors: []
+    });
+  };
 
   const filters = {
     sizes: ["S", "M", "L", "XL", "XXL"],
@@ -153,8 +174,8 @@ export default function Men() {
                   key={category.name}
                   to={category.path}
                   className={`text-sm font-medium transition-colors ${
-                    category.available
-                      ? "text-foreground hover:text-neon-blue"
+                    category.available 
+                      ? "text-foreground hover:text-neon-blue" 
                       : "text-muted-foreground cursor-not-allowed"
                   } ${category.name === "MEN" ? "text-neon-blue" : ""}`}
                 >
@@ -287,7 +308,14 @@ export default function Men() {
                 <h4 className="font-medium mb-3">Size</h4>
                 <div className="flex flex-wrap gap-2">
                   {filters.sizes.map(size => (
-                    <Badge key={size} variant="outline" className="cursor-pointer hover:bg-neon-blue hover:text-neon-foreground">
+                    <Badge 
+                      key={size} 
+                      variant={selectedFilters.sizes.includes(size) ? "default" : "outline"} 
+                      className={`cursor-pointer hover:bg-neon-blue hover:text-neon-foreground ${
+                        selectedFilters.sizes.includes(size) ? 'bg-neon-blue text-neon-foreground' : ''
+                      }`}
+                      onClick={() => toggleFilter('sizes', size)}
+                    >
                       {size}
                     </Badge>
                   ))}
@@ -300,7 +328,12 @@ export default function Men() {
                 <div className="space-y-2">
                   {filters.priceRanges.map(range => (
                     <label key={range.label} className="flex items-center gap-2 cursor-pointer">
-                      <input type="checkbox" className="rounded" />
+                      <input 
+                        type="checkbox" 
+                        className="rounded" 
+                        checked={selectedFilters.priceRange?.min === range.min}
+                        onChange={() => toggleFilter('priceRange', { min: range.min, max: range.max })}
+                      />
                       <span className="text-sm">{range.label}</span>
                     </label>
                   ))}
@@ -313,7 +346,12 @@ export default function Men() {
                 <div className="space-y-2">
                   {filters.brands.map(brand => (
                     <label key={brand} className="flex items-center gap-2 cursor-pointer">
-                      <input type="checkbox" className="rounded" />
+                      <input 
+                        type="checkbox" 
+                        className="rounded" 
+                        checked={selectedFilters.brands.includes(brand)}
+                        onChange={() => toggleFilter('brands', brand)}
+                      />
                       <span className="text-sm">{brand}</span>
                     </label>
                   ))}
@@ -327,124 +365,149 @@ export default function Men() {
                   {filters.colors.map(color => (
                     <div 
                       key={color} 
-                      className="w-8 h-8 rounded-full border-2 border-border cursor-pointer hover:scale-110 transition-transform"
+                      className={`w-8 h-8 rounded-full border-2 cursor-pointer hover:scale-110 transition-transform ${
+                        selectedFilters.colors.includes(color) ? 'border-neon-blue border-4' : 'border-border'
+                      }`}
                       style={{ backgroundColor: color.toLowerCase() }}
                       title={color}
+                      onClick={() => toggleFilter('colors', color)}
                     ></div>
                   ))}
                 </div>
+              </div>
+              
+              {/* Clear Filters */}
+              <div className="mb-6">
+                <Button 
+                  variant="outline" 
+                  className="w-full"
+                  onClick={clearAllFilters}
+                >
+                  Clear All Filters
+                </Button>
               </div>
             </div>
           </aside>
 
           {/* Products Grid */}
           <main className="flex-1">
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-              {products.map((product) => (
-                <div key={product.id} className="group">
-                  <Link to={`/product/${product.id}`}>
-                    <div className="relative overflow-hidden rounded-lg mb-4 aspect-square">
-                      <img
-                        src={product.image}
-                        alt={product.name}
-                        className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
-                      />
-                      {product.discount && (
-                        <div className="absolute top-2 left-2 bg-neon-blue text-neon-foreground px-2 py-1 rounded text-sm font-semibold">
-                          {product.discount}% OFF
-                        </div>
-                      )}
-                      <Button
-                        variant="ghost"
-                        size="icon"
-                        className={`absolute top-2 right-2 ${isDarkMode ? 'bg-black/80 hover:bg-black' : 'bg-white/80 hover:bg-white'}`}
-                        onClick={(e) => {
-                          e.preventDefault();
-                          e.stopPropagation();
-                          if (requireAuth()) {
-                            addToWishlist(product);
-                          }
-                        }}
-                      >
-                        <Heart className={`h-4 w-4 ${isInWishlist(product.id) ? 'fill-red-500 text-red-500' : isDarkMode ? 'text-white' : 'text-black'}`} />
-                      </Button>
-                    </div>
-                  </Link>
-
-                  <div>
-                    <p className="text-xs text-muted-foreground mb-1">{product.brand}</p>
-                    <Link to={`/product/${product.id}`}>
-                      <h3 className="font-semibold text-lg mb-1 hover:text-neon-blue">{product.name}</h3>
-                    </Link>
-
-                    <div className="flex items-center gap-1 mb-2">
-                      {[...Array(5)].map((_, i) => (
-                        <Star
-                          key={i}
-                          className={`h-4 w-4 ${
-                            i < Math.floor(product.rating)
-                              ? 'fill-neon-blue text-neon-blue'
-                              : 'text-muted-foreground'
-                          }`}
-                        />
-                      ))}
-                      <span className="text-sm text-muted-foreground ml-1">
-                        ({product.rating}) • {product.reviews} reviews
-                      </span>
-                    </div>
-
-                    <div className="flex items-center gap-2 mb-3">
-                      <span className="text-lg font-bold">₹{product.price}</span>
-                      {product.originalPrice && (
-                        <span className="text-sm text-muted-foreground line-through">₹{product.originalPrice}</span>
-                      )}
-                    </div>
-
-                    <div className="flex flex-wrap gap-1 mb-3">
-                      {product.colors.slice(0, 3).map(color => (
-                        <div
-                          key={color}
-                          className="w-4 h-4 rounded-full border border-border"
-                          style={{ backgroundColor: color.toLowerCase() }}
-                          title={color}
-                        ></div>
-                      ))}
-                      {product.colors.length > 3 && (
-                        <span className="text-xs text-muted-foreground">+{product.colors.length - 3}</span>
-                      )}
-                    </div>
-
-                    {/* Add to Cart and Buy Now buttons */}
-                    <div className="flex gap-2">
-                      <Button
-                        className="flex-1 bg-neon-blue hover:bg-neon-blue/90 text-neon-foreground"
-                        onClick={(e) => {
-                          e.preventDefault();
-                          if (requireAuth()) {
-                            addToCart(product);
-                          }
-                        }}
-                      >
-                        Add to Cart
-                      </Button>
-                      <Button
-                        variant="outline"
-                        className="flex-1"
-                        onClick={(e) => {
-                          e.preventDefault();
-                          if (requireAuth()) {
-                            addToCart(product);
-                            navigate('/checkout');
-                          }
-                        }}
-                      >
-                        Buy Now
-                      </Button>
-                    </div>
-                  </div>
+            {loading ? (
+              <div className="flex justify-center items-center h-64">
+                <div className="text-lg">Loading products...</div>
+              </div>
+            ) : (
+              <>
+                <div className="mb-4 text-sm text-muted-foreground">
+                  Showing {filteredProducts.length} products
                 </div>
-              ))}
-            </div>
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                  {filteredProducts.map((product) => (
+                    <div key={product.id} className="group">
+                      <Link to={`/product/${product.id}`}>
+                        <div className="relative overflow-hidden rounded-lg mb-4 aspect-square">
+                          <img
+                            src={product.image}
+                            alt={product.name}
+                            className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+                          />
+                          {product.discount && (
+                            <div className="absolute top-2 left-2 bg-neon-blue text-neon-foreground px-2 py-1 rounded text-sm font-semibold">
+                              {product.discount}% OFF
+                            </div>
+                          )}
+                          <Button
+                            variant="ghost"
+                            size="icon"
+                            className={`absolute top-2 right-2 ${isDarkMode ? 'bg-black/80 hover:bg-black' : 'bg-white/80 hover:bg-white'}`}
+                            onClick={(e) => {
+                              e.preventDefault();
+                              e.stopPropagation();
+                              if (requireAuth()) {
+                                addToWishlist(product);
+                              }
+                            }}
+                          >
+                            <Heart className={`h-4 w-4 ${isInWishlist(product.id) ? 'fill-red-500 text-red-500' : isDarkMode ? 'text-white' : 'text-black'}`} />
+                          </Button>
+                        </div>
+                      </Link>
+
+                      <div>
+                        <p className="text-xs text-muted-foreground mb-1">{product.brand}</p>
+                        <Link to={`/product/${product.id}`}>
+                          <h3 className="font-semibold text-lg mb-1 hover:text-neon-blue">{product.name}</h3>
+                        </Link>
+
+                        <div className="flex items-center gap-1 mb-2">
+                          {[...Array(5)].map((_, i) => (
+                            <Star
+                              key={i}
+                              className={`h-4 w-4 ${
+                                i < Math.floor(product.rating)
+                                  ? 'fill-neon-blue text-neon-blue'
+                                  : 'text-muted-foreground'
+                              }`}
+                            />
+                          ))}
+                          <span className="text-sm text-muted-foreground ml-1">
+                            ({product.rating}) • {product.reviews} reviews
+                          </span>
+                        </div>
+
+                        <div className="flex items-center gap-2 mb-3">
+                          <span className="text-lg font-bold">₹{product.price}</span>
+                          {product.originalPrice && (
+                            <span className="text-sm text-muted-foreground line-through">₹{product.originalPrice}</span>
+                          )}
+                        </div>
+
+                        <div className="flex flex-wrap gap-1 mb-3">
+                          {product.colors.slice(0, 3).map(color => (
+                            <div
+                              key={color}
+                              className="w-4 h-4 rounded-full border border-border"
+                              style={{ backgroundColor: color.toLowerCase() }}
+                              title={color}
+                            ></div>
+                          ))}
+                          {product.colors.length > 3 && (
+                            <span className="text-xs text-muted-foreground">+{product.colors.length - 3}</span>
+                          )}
+                        </div>
+
+                        {/* Add to Cart and Buy Now buttons */}
+                        <div className="flex gap-2">
+                          <Button
+                            className="flex-1 bg-neon-blue hover:bg-neon-blue/90 text-neon-foreground"
+                            onClick={(e) => {
+                              e.preventDefault();
+                              if (requireAuth()) {
+                                addToCart(product);
+                              }
+                            }}
+                          >
+                            Add to Cart
+                          </Button>
+                          <Button
+                            variant="outline"
+                            className="flex-1"
+                            onClick={(e) => {
+                              e.preventDefault();
+                              if (requireAuth()) {
+                                addToCart(product);
+                                navigate('/checkout');
+                              }
+                            }}
+                          >
+                            Buy Now
+                          </Button>
+                        </div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </>
+            )}
             
             {/* Load More */}
             <div className="text-center mt-12">
@@ -473,7 +536,14 @@ export default function Men() {
                 <h4 className="font-medium mb-3">Size</h4>
                 <div className="flex flex-wrap gap-2">
                   {filters.sizes.map(size => (
-                    <Badge key={size} variant="outline" className="cursor-pointer hover:bg-neon-blue hover:text-neon-foreground">
+                    <Badge 
+                      key={size} 
+                      variant={selectedFilters.sizes.includes(size) ? "default" : "outline"} 
+                      className={`cursor-pointer hover:bg-neon-blue hover:text-neon-foreground ${
+                        selectedFilters.sizes.includes(size) ? 'bg-neon-blue text-neon-foreground' : ''
+                      }`}
+                      onClick={() => toggleFilter('sizes', size)}
+                    >
                       {size}
                     </Badge>
                   ))}
@@ -485,7 +555,12 @@ export default function Men() {
                 <div className="space-y-2">
                   {filters.priceRanges.map(range => (
                     <label key={range.label} className="flex items-center gap-2 cursor-pointer">
-                      <input type="checkbox" className="rounded" />
+                      <input 
+                        type="checkbox" 
+                        className="rounded" 
+                        checked={selectedFilters.priceRange?.min === range.min}
+                        onChange={() => toggleFilter('priceRange', { min: range.min, max: range.max })}
+                      />
                       <span className="text-sm">{range.label}</span>
                     </label>
                   ))}
@@ -494,7 +569,7 @@ export default function Men() {
             </div>
             
             <div className="flex gap-2 mt-8">
-              <Button variant="outline" className="flex-1" onClick={() => setIsFilterOpen(false)}>
+              <Button variant="outline" className="flex-1" onClick={clearAllFilters}>
                 Clear All
               </Button>
               <Button className="flex-1 bg-neon-blue hover:bg-neon-blue/90" onClick={() => setIsFilterOpen(false)}>
