@@ -33,9 +33,18 @@ export default function Signup() {
       return false;
     }
 
+    if (!formData.lastName.trim()) {
+      alert("Please enter your last name");
+      return false;
+    }
+
     if (signupMethod === "phone") {
       if (formData.phoneNumber.length !== 10) {
         alert("Please enter a valid 10-digit phone number");
+        return false;
+      }
+      if (formData.email && !formData.email.includes("@")) {
+        alert("Please enter a valid email address or leave it empty");
         return false;
       }
     } else {
@@ -49,6 +58,10 @@ export default function Signup() {
       }
       if (formData.password !== formData.confirmPassword) {
         alert("Passwords don't match");
+        return false;
+      }
+      if (formData.phoneNumber && formData.phoneNumber.length !== 10) {
+        alert("Please enter a valid 10-digit phone number or leave it empty");
         return false;
       }
     }
