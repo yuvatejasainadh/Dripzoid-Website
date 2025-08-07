@@ -4,6 +4,7 @@ import { ShoppingBag, Heart, Search, User, Menu, Moon, Sun, Package, MapPin, Cre
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { useCart } from "../context/CartContext";
 
 export default function Profile() {
   const [isDarkMode, setIsDarkMode] = useState(false);
