@@ -114,11 +114,6 @@ export default function Index() {
               <Button variant="ghost" size="icon" onClick={toggleDarkMode}>
                 {isDarkMode ? <Sun className="h-5 w-5" /> : <Moon className="h-5 w-5" />}
               </Button>
-              <Button variant="ghost" size="icon" asChild>
-                <Link to="/search">
-                  <Search className="h-5 w-5" />
-                </Link>
-              </Button>
               <Button variant="ghost" size="icon" asChild className="relative">
                 <Link to="/profile#wishlist">
                   <Heart className="h-5 w-5" />
