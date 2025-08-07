@@ -11,6 +11,19 @@ export default function Checkout() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [selectedPayment, setSelectedPayment] = useState("upi");
   const [orderPlaced, setOrderPlaced] = useState(false);
+  const { isLoggedIn, user } = useAuth();
+
+  // Redirect to login if not logged in
+  useEffect(() => {
+    if (!isLoggedIn) {
+      window.location.href = '/login';
+    }
+  }, [isLoggedIn]);
+
+  // Don't render anything if not logged in
+  if (!isLoggedIn) {
+    return null;
+  }
   
   const [formData, setFormData] = useState({
     firstName: "",
