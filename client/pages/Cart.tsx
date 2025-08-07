@@ -10,44 +10,7 @@ export default function Cart() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [couponCode, setCouponCode] = useState("");
   const [pincode, setPincode] = useState("");
-  const [cartItems, setCartItems] = useState([
-    {
-      id: 1,
-      name: "Oversized Drip Hoodie",
-      brand: "DRIPZOID",
-      price: 1999,
-      originalPrice: 2999,
-      image: "https://images.unsplash.com/photo-1556821840-3a63f95609a7?w=300&h=300&fit=crop",
-      size: "L",
-      color: "Black",
-      quantity: 2,
-      discount: 33
-    },
-    {
-      id: 2,
-      name: "Streetwear Cargo Pants",
-      brand: "DRIPZOID",
-      price: 1799,
-      originalPrice: 2299,
-      image: "https://images.unsplash.com/photo-1473966968600-fa801b869a1a?w=300&h=300&fit=crop",
-      size: "M",
-      color: "Olive",
-      quantity: 1,
-      discount: 22
-    },
-    {
-      id: 3,
-      name: "Urban Graphic Tee",
-      brand: "DRIPZOID",
-      price: 799,
-      originalPrice: 1299,
-      image: "https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=300&h=300&fit=crop",
-      size: "L",
-      color: "White",
-      quantity: 3,
-      discount: 38
-    }
-  ]);
+  const { cartItems, updateQuantity, removeFromCart, getCartCount, getCartTotal } = useCart();
 
   const toggleDarkMode = () => {
     setIsDarkMode(!isDarkMode);
