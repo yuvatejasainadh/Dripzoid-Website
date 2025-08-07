@@ -47,6 +47,18 @@ export default {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
         },
+        // DRIPZOID Brand Colors
+        neon: {
+          DEFAULT: "hsl(var(--neon))",
+          foreground: "hsl(var(--neon-foreground))",
+          blue: "hsl(var(--neon-blue))",
+          green: "hsl(var(--neon-green))",
+        },
+        brand: {
+          brown: "hsl(var(--brand-brown))",
+          cream: "hsl(var(--brand-cream))",
+          dark: "hsl(var(--brand-dark))",
+        },
         sidebar: {
           DEFAULT: "hsl(var(--sidebar-background))",
           foreground: "hsl(var(--sidebar-foreground))",
