@@ -4,6 +4,7 @@ import { ShoppingBag, Heart, Search, User, Menu, Moon, Sun, Star, Filter, Slider
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { useCart } from "../context/CartContext";
+import { useAuth } from "../context/AuthContext";
 
 export default function Men() {
   const [isDarkMode, setIsDarkMode] = useState(false);
