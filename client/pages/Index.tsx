@@ -119,9 +119,14 @@ export default function Index() {
                   <Search className="h-5 w-5" />
                 </Link>
               </Button>
-              <Button variant="ghost" size="icon" asChild>
-                <Link to="/profile">
+              <Button variant="ghost" size="icon" asChild className="relative">
+                <Link to="/profile#wishlist">
                   <Heart className="h-5 w-5" />
+                  {wishlistItems.length > 0 && (
+                    <Badge className="absolute -top-2 -right-2 h-5 w-5 flex items-center justify-center p-0 bg-red-500 text-white text-xs">
+                      {wishlistItems.length}
+                    </Badge>
+                  )}
                 </Link>
               </Button>
               <Button variant="ghost" size="icon" asChild className="relative">
