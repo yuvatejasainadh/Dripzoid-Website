@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import { ShoppingBag, Heart, Search, User, Menu, Moon, Sun, Plus, Minus, Trash2, ShoppingCart, Tag, MapPin, Truck } from "lucide-react";
+import { ShoppingBag, Heart, Search, User, Menu, Moon, Sun, Plus, Minus, Trash2, ShoppingCart, Tag, MapPin, Truck, Shield, RotateCcw } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 
