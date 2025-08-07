@@ -499,7 +499,9 @@ export default function SearchResults() {
                           className="flex-1 bg-neon-blue hover:bg-neon-blue/90 text-neon-foreground"
                           onClick={(e) => {
                             e.preventDefault();
-                            addToCart(product);
+                            if (requireAuth()) {
+                              addToCart(product);
+                            }
                           }}
                         >
                           Add to Cart
@@ -509,7 +511,9 @@ export default function SearchResults() {
                           className="flex-1"
                           onClick={(e) => {
                             e.preventDefault();
-                            window.location.href = '/checkout';
+                            if (requireAuth()) {
+                              window.location.href = '/checkout';
+                            }
                           }}
                         >
                           Buy Now
