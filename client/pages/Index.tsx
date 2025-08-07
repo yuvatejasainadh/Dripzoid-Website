@@ -73,7 +73,7 @@ export default function Index() {
               <img
                 src="https://cdn.builder.io/api/v1/assets/cb420c754f164cb09479ca8042848804/1754575128006-fef9ca?format=webp&width=800"
                 alt="DRIPZOID"
-                className="h-8 w-auto"
+                className="h-12 w-auto"
               />
             </Link>
 
@@ -153,7 +153,7 @@ export default function Index() {
           <img
             src="https://cdn.builder.io/api/v1/assets/cb420c754f164cb09479ca8042848804/1754575128006-fef9ca?format=webp&width=800"
             alt="DRIPZOID"
-            className="h-20 md:h-32 w-auto mx-auto mb-4"
+            className="h-32 md:h-48 w-auto mx-auto mb-4"
           />
           <h1 className="text-2xl md:text-4xl font-bold text-brand-dark mb-6">
             STYLE THAT POPS
@@ -310,7 +310,7 @@ export default function Index() {
               <img
                 src="https://cdn.builder.io/api/v1/assets/cb420c754f164cb09479ca8042848804/1754575128006-fef9ca?format=webp&width=800"
                 alt="DRIPZOID"
-                className="h-8 w-auto mb-4"
+                className="h-10 w-auto mb-4"
               />
               <p className="text-muted-foreground">
                 India's favorite streetwear brand for Gen Z fashion lovers.
